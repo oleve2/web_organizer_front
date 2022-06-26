@@ -1,0 +1,18 @@
+
+.carditem_wrapper {
+  max-width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin-bottom: 20px;
+}
+
+.base-card-single__textarea {
+  width: 80%;
+  height: 400px;
+  font-size: 14px;
+}
+
+.carditem__textwrapper {
+  display: flex;
+  flex-direction: column;  
+}

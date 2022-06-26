@@ -1,0 +1,145 @@
+.wrapper {
+  margin: 10px;
+  padding: 10px;
+}
+.nav-header {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+}
+
+/* home page ------------------------------------- */
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 650px) {
+  .home-img {
+    width: 100%;
+  }
+}
+
+/* base ------------------------------------- */
+.base-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.base-card {
+  border: 1px solid black;
+  width: 300px;
+  margin: 10px;
+  padding: 5px;
+}
+
+
+
+.base-partsArr-list {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.base-partsArr-list__item {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 5px;
+}
+
+.base-partsArr-list__item_active {
+  background-color: lightblue;
+}
+
+.button-control {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.button-edit {
+  background: yellow;
+}
+.button-save {
+  background: greenyellow;
+}
+.button-delete {
+  background: red;
+  color: white;
+}
+.button-new {
+  background: #0050f7;
+  color: white;
+  font-weight: bold;
+}
+
+/* navigation ------------------------------------- */
+.nav-ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+.nav-li {
+  margin-right: 10px;
+  border: 1px solid black;
+  margin: 5px 10px;
+  padding: 5px;
+  text-decoration: none;
+}
+.nav-lnk {
+  text-decoration: none;
+}
+
+.nav-logins {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin-left: auto;
+}
+
+.nav-login-info {
+  margin-right: 10px;
+  /*border: 1px solid black;*/
+  margin: 5px 10px;
+  padding: 5px;
+  text-decoration: none;
+}
+
+
+/* wild shit ------------------------------------- */
+.bar2 {
+  width: 600px;
+  /*width: 100%;*/
+}
+
+.temp-block {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+}
+
+.ul-charts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+table, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  min-width: 40px;
+}
+
+.tabHeader {
+  color: blue;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.tabBody {
+  padding: 5px;
+}
