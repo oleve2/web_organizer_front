@@ -24,7 +24,7 @@ REACT_APP_PASSWORD="pass\$2"
 REACT_APP_ACCESS_TOKEN="BzWvp7Ruqnw7DWExxMk2bPvg"
 ```
 
-REACT_APP_BASE_URL - net address of backend server (localhost or net ip address)
-REACT_APP_LOGIN - your login
-REACT_APP_PASSWORD - your password, note that special symbols in pass f.e. should be escaped with ```\``` (```pass\$2```)
-REACT_APP_ACCESS_TOKEN - this is a feature in development - a token to secure communication with backend server.
+REACT_APP_BASE_URL - net address of backend server (localhost or net ip address)  
+REACT_APP_LOGIN - your login  
+REACT_APP_PASSWORD - your password, note that special symbols in pass f.e. should be escaped with ```\``` (```pass\$2```)  
+REACT_APP_ACCESS_TOKEN - this is a feature in development - a token to secure communication with backend server.  
