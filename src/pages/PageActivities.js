@@ -51,22 +51,22 @@ export default function PageActivities(props) {
 
   // saving new activity log
   const handleSaveNewActivLog = async (dataObj) => {
-    console.log(dataObj);
+    //console.log(dataObj);
     dispatch(fetchSaveNewActiv(dataObj));
   }
   // updating activity log
   const handleUpdateActivLog = async (dataObj) => {
-    console.log(dataObj);
+    //console.log(dataObj);
     dispatch(fetchUpdateActivLogById(dataObj));    
   }
   // deleting activity log item by id
   const handleDeleteActivLog = async (id) => {
-    console.log(`deleting ${id}`);
+    //console.log(`deleting ${id}`);
     dispatch(fetchDeleteActivLogById(id));
   }
 
   const handleSaveNewActivName = async (dataObj) => {
-    console.log(dataObj);
+    //console.log(dataObj);
     dispatch(fetchSaveNewActivName(dataObj));
   }
 
@@ -85,11 +85,10 @@ export default function PageActivities(props) {
       setActivsFilt(bif);
   }
 
-
   useEffect( () => {
     document.title = "WA3: Activities";
     doFilterActivs();
-  }, [storeActivLogs])
+  }, [storeActivLogs, doFilterActivs])
 
   // -------------------------------------------
   return (

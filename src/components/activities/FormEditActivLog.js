@@ -15,7 +15,7 @@ export default function FormEditActivLog(props) {
       activ_date:     form_activ_date,
       activ_value:    Number(form_activ_value)
     }
-    console.log('updating dataObj=', dataObj);
+    //console.log('updating dataObj=', dataObj);
     props.handleUpdateActivLog(dataObj);
   }
 

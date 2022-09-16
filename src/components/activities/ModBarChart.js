@@ -15,7 +15,7 @@ export default function ModBarChart(props) {
   const [ready, setReady] = useState(false);
   
   // options
-  const [options, setOptions] = useState({
+  const options = {
     responsive: true,
     plugins: {
       legend: {
@@ -31,7 +31,7 @@ export default function ModBarChart(props) {
         suggestedMin: 0
       }
     }
-  });
+  };
 
   useEffect( () => {
     if (props.f1 === 'val') {
@@ -46,7 +46,7 @@ export default function ModBarChart(props) {
       })      
     };
     setReady(true);
-  }, [])
+  }, [props.data2, props.datasets, props.f1, props.labels])
 
 
   // -------------------------------------

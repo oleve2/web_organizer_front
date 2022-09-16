@@ -1,7 +1,7 @@
 import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { /*useState,*/ useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // pages
@@ -18,7 +18,7 @@ import Login from './components/auth/Login';
 // store
 import { fetchBaseItems } from './rtkstore/baseReducer';
 import { fetchActivLogs } from './rtkstore/activsReducer';
-import { datesSetup, datesSetupOther } from './rtkstore/analyticReducer';
+import { datesSetupOther } from './rtkstore/analyticReducer';
 
 import { fromLS } from './rtkstore/authReducer';
 import { setLoginToken } from './rtkstore/authReducer';
@@ -31,19 +31,15 @@ function App() {
   const storeToken = useSelector( (store) => store.authReducer.token)
 
   useEffect( () => {
-    // login LS check
+    // 
     dispatch(fromLS());
-  },[])
-
-  useEffect( () => {
     // data fetch
     dispatch(fetchBaseItems());
     dispatch(fetchActivLogs());
     
     // calculate dates for analytics
-    //dispatch( datesSetup() );
     dispatch( datesSetupOther() );
-  }, [])
+  }, [dispatch])
 
   const validateLogPass = async (login, pass) => {
     if (login === process.env.REACT_APP_LOGIN && pass === process.env.REACT_APP_PASSWORD) {

@@ -50,10 +50,6 @@ export const fetchBaseItems = () => async (dispatch) => {
   // parts
   let parts = CalcPartsWithCnts(dataWithlink, 'part');
   dispatch(actionsBaseRed.setPartsArray(parts));
-
-  // themes
-  //let themes = CalcPartsWithCnts(dataWithlink, 'theme');
-  //dispatch(actionsBaseRed.setThemesArray(themes));
 }
 
 /* support ------------------------------------- */ 
