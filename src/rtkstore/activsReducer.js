@@ -76,8 +76,8 @@ export const fetchSaveNewActiv = (dataObj) => async (dispatch) => {
     method:'POST', 
     body: JSON.stringify(dataObj)
   });
-  let respJson = await resp.json();
-  console.log('done ', respJson);
+  await resp.json(); //let respJson = 
+  //console.log('done ', respJson);
   //
   dispatch(fetchActivLogs());
 }
@@ -89,8 +89,8 @@ export const fetchSaveNewActivName = (dataObj) => async (dispatch) => {
     method:'POST', 
     body: JSON.stringify(dataObj)
   });    
-  let respJson = await resp.json();
-  console.log('done ', respJson);
+  await resp.json(); //let respJson = 
+  //console.log('done ', respJson);
   //
   dispatch(fetchActivLogs());  
 }
@@ -99,8 +99,8 @@ export const fetchSaveNewActivName = (dataObj) => async (dispatch) => {
 export const fetchDeleteActivLogById = (id) => async (dispatch) => {
   //console.log(`deleting ${id}`);
   let resp = await fetch(process.env.REACT_APP_BASE_URL + `/api/v1/activ_logs_del/${id}`, {method: 'POST'})
-  let respJson = await resp.json();
-  console.log('done ', respJson);    
+  await resp.json(); //let respJson = 
+  //console.log('done ', respJson);    
   //await fetchActivLogs();
   dispatch(fetchActivLogs());
 }
@@ -112,8 +112,8 @@ export const fetchUpdateActivLogById = (dataObj) => async (dispatch) => {
     method:'POST', 
     body: JSON.stringify(dataObj)
   });
-  let respJson = await resp.json();
-  console.log('done ', respJson);
+  await resp.json(); //let respJson = 
+  //console.log('done ', respJson);
   //
   dispatch(fetchActivLogs());  
 }

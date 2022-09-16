@@ -1,11 +1,9 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 import { Link } from "react-router-dom"
-import { actionsAuthRed } from "../../rtkstore/authReducer"
 import { useDispatch, useSelector } from "react-redux"
 
+// mui
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -13,25 +11,18 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-//import ListItemText from '@mui/material/ListItemText';
-
-//import ListItemIcon from '@mui/material/ListItemIcon';
-/*
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
-import CloseIcon from '@mui/icons-material/Close';
-*/
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 
+// images
 import menuBlue from '../../assets/menu_blue.png';
 
+// rtk
 import { logoutAndClearLS } from "../../rtkstore/authReducer";
 
-// --------------------------------------------------------
+
 export default function Navigation(props) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const storeLogin = useSelector( (store) => store.authReducer.login);
 
   const doLogout = () => {
@@ -39,19 +30,18 @@ export default function Navigation(props) {
   }
 
   const [isOpen, setisOpen] = useState(false);
-  const [newMenu, setnewMenu] = useState([
+  const newMenu = [
     {name: 'Home', lnk: '/'},
     {name: 'Base', lnk: '/base'},
     {name: 'Base: new card', lnk: '/base/new'},
     {name: 'Activities', lnk: '/activities_manage'},
     {name: 'Analytics', lnk: '/analytics'},
-  ])
+  ]
 
   const toggleDrawer = (open) => {
     setisOpen(open);
   }
   
-  // -----------------------------------------------
   return (
     <>
     <div className="nav-header">

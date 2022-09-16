@@ -4,19 +4,19 @@ export default function ModTable(props) {
     <>
     <table>
       <thead>
-        <tr> {/* header */}
+        <tr>{/*header*/}
           <td className="tabHeader">id</td>
           <td className="tabHeader">activ_name_id</td>
           <td className="tabHeader">activ_name</td>
           <td className="tabHeader">activ_norm_id</td>
           <td className="tabHeader">activ_date</td>
           <td className="tabHeader">activ_value</td>
-          <td className="tabHeader"> </td>
+          <td className="tabHeader"></td>
         </tr>
       </thead>
 
-      {/* body */}
-      <tbody>
+      
+      <tbody>{/*body*/}
       { props.activs.map( (item) => {
         return <tr key={item.id}>
           <td className="tabBody">{item.id}</td>

@@ -1,4 +1,4 @@
-import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import baseReducer from './baseReducer';
 import activsReducer from './activsReducer';
 import analyticReducer from './analyticReducer';

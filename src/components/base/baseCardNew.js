@@ -26,19 +26,19 @@ export default function BaseCardNew(props) {
       title:  frmTitle,
       text:   frmText
     }
-    console.log('saving post', dataObj);
+    //console.log('saving post', dataObj);
 
     let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/postNew', {
       method: 'POST',
       body: JSON.stringify(dataObj),
     })
-    console.log(resp.ok);
+    //console.log(resp.ok);
     if (!resp.ok) {
       throw new Error(resp.statusText);
     }
 
-    const data = await resp.json();
-    console.log('SaveNewPost fetch data=', data);
+    await resp.json(); //const data = 
+    //console.log('SaveNewPost fetch data=', data);
     dispatch(fetchBaseItems());
     navigate('/base');
   }

@@ -21,6 +21,10 @@ export default function BaseCardSingle(props) {
   const [isEdit, setIsEdit] = useState(false);
 
   useEffect( () => {
+    document.title = `WA3: Card #${id}`;
+  },[id])  
+
+  useEffect( () => {
     async function fetchData() {
       let resp = await fetch(process.env.REACT_APP_BASE_URL+`/api/v1/post/${id}`, {
         method: 'GET',
@@ -38,10 +42,6 @@ export default function BaseCardSingle(props) {
     fetchData();
   }, [id])
 
-  useEffect( () => {
-    document.title = `WA3: Card #${id}`;
-  },[])  
-
   //
   const handleSaveChanges = async () => {
     let dataObj = {
@@ -51,35 +51,35 @@ export default function BaseCardSingle(props) {
       title: frmTitle,
       text: frmText
     }
-    console.log('saving changes ....'); //, dataObj
+    //console.log('saving changes ....'); //, dataObj
 
     let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/postUpdate', {
       method: 'POST',
       body: JSON.stringify(dataObj),
     })
-    console.log(resp.ok);
+    //console.log(resp.ok);
     if (!resp.ok) {
       throw new Error(resp.statusText);
     }
 
-    const data = await resp.json();
-    console.log('getServiceByIdUpgr =', data);
+    await resp.json(); // const data = 
+    //console.log('getServiceByIdUpgr =', data);
     dispatch(fetchBaseItems());
   }
 
   // 
   const handleDelete = async () => {
-    console.log(`deleting ${card.id}`);
+    //console.log(`deleting ${card.id}`);
     let resp = await fetch(process.env.REACT_APP_BASE_URL + `/api/v1/postDelete/${card.id}`, {
       method: 'POST'
     })
-    console.log(resp.ok);
+    //console.log(resp.ok);
     if (!resp.ok) {
       throw new Error(resp.statusText);
     }
 
-    const data = await resp.json();
-    console.log('handleDelete =', data);
+    await resp.json(); // const data = 
+    //console.log('handleDelete =', data);
     dispatch(fetchBaseItems());
     navigate('/base');
   }
