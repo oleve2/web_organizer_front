@@ -9,6 +9,7 @@ import PageHome from './pages/PageHome';
 import PageBase from './pages/PageBase';
 import PageActivities from './pages/PageActivities';
 import PageAnalyticsByOne from './pages/PageAnalytics';
+import PageUpDownload from './pages/PageUpDownload';
 
 // components
 import BaseCardSingle from './components/base/baseCardSingle';
@@ -65,6 +66,7 @@ function App() {
           <Route path='/base/:id' element={<BaseCardSingle/>}></Route>
           <Route path='/activities_manage' element={<PageActivities/>}></Route>
           <Route path='/analytics' element={<PageAnalyticsByOne/>}></Route>
+          <Route path='/updownload' element={<PageUpDownload/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

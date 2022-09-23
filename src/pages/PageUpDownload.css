@@ -1,0 +1,30 @@
+
+.divControls {
+  display: flex;
+}
+
+.divControls_mode {
+  border: 1px solid black;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.divControls_mode__active {
+  background-color: lightblue;
+}
+
+.divUpload_status {
+  margin-bottom: 10px;
+}
+
+.divDownload {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.divUpload {
+  margin-top: 20px;
+
+}
+
