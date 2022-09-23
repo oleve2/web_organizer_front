@@ -36,6 +36,7 @@ export default function Navigation(props) {
     {name: 'Base: new card', lnk: '/base/new'},
     {name: 'Activities', lnk: '/activities_manage'},
     {name: 'Analytics', lnk: '/analytics'},
+    {name: 'UpDownload', lnk: '/updownload'},
   ]
 
   const toggleDrawer = (open) => {
