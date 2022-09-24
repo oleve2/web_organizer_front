@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navigation from "../layout/Navigation";
 import ReactMarkdown from 'react-markdown'  
+import rehypeRaw from "rehype-raw";
 import { fetchBaseItems } from "../../rtkstore/baseReducer";
 import { useDispatch } from "react-redux";
 
@@ -109,7 +110,7 @@ export default function BaseCardSingle(props) {
       <div>Theme: {card.theme}</div>
       <div>Title: {card.title}</div> 
       <br/>
-      <ReactMarkdown children={frmText}/>
+      <ReactMarkdown children={frmText} rehypePlugins={[rehypeRaw]}/>
     </>
     : <>
       <div> <input value={frmPart}   onChange={(e) => { setFrmPart(e.target.value) }}/> </div>
