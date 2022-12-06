@@ -1,12 +1,15 @@
+import { FC, useState } from "react";
 
-/*
-  * handleSaveNewActivName
-  * handleIsNewActName
-*/
+// models
+import { ActivityModel } from '../../models/models';
 
-import { useState } from "react";
+interface FormNewActivNameProps {
+  handleSaveNewActivName: (val: ActivityModel) => void,
+  handleIsNewActName: (val: boolean) => void,
+}
 
-export default function FormNewActivName(props) {
+//
+const FormNewActivName:FC<FormNewActivNameProps> = (props) => {
   // new ActivName items
   const [formAN_name, setFormAN_name] = useState('');
   const [formAN_date_start, setFormAN_date_start] = useState('');
@@ -14,7 +17,8 @@ export default function FormNewActivName(props) {
   const [formAN_norm_id, setFormAN_norm_id] = useState('');
 
   const clickSave = () => {
-    let dataObj = {
+    let dataObj: ActivityModel = {
+      id: 0,
       name: formAN_name, 
       date_start: formAN_date_start, 
       date_end: formAN_date_end,
@@ -51,3 +55,4 @@ export default function FormNewActivName(props) {
   )
 }
 
+export default FormNewActivName;

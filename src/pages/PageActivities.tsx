@@ -1,46 +1,80 @@
-import { useState, useEffect } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom"
 
+// components
 import Navigation from '../components/layout/Navigation';
-import ULPartsList from '../components/layout/ULPartsList';
-
+//import ULPartsList from '../components/layout/ULPartsList';
 import ModTable from '../components/activities/ModTable';
 import FormNewActivName from '../components/activities/FormNewActivName';
 import FormNewActivLog from '../components/activities/FormNewActivLog';
 import FormEditActivLog from '../components/activities/FormEditActivLog';
+import AttrSelFilt from '../components/UI/AttrSelFilt';
+import Paginator from '../components/UI/Paginator';
 
-import { fetchSaveNewActiv, fetchSaveNewActivName, 
-  fetchDeleteActivLogById, fetchUpdateActivLogById } from '../rtkstore/activsReducer';
+// models
+import { ActivityLogModel, ActivityModel } from '../models/models';
 
-export default function PageActivities(props) {
-  const dispatch = useDispatch();
+
+// store
+import { RootState, AppDispatch } from '../rtkstore/store';
+import { actionsActivsRed, fetchSaveNewActiv, fetchSaveNewActivName, fetchDeleteActivLogById, fetchUpdateActivLogById } from '../rtkstore/activsReducer';
+import { doActivsSearch } from '../rtkstore/activsReducer';
+
+
+//
+const PageActivities:FC = (props) => {
+  const dispatch = useDispatch<AppDispatch>();
 
   const [isEditActivLog, setIsEditActivLog] = useState(false);
   const [isNewActivLog, setIsNewActivLog] = useState(false);
   const [isNewActivName, setIsNewActivName] = useState(false);
   
   // ActivLog edit item
-  const [itemEditActivLog, setItemEditActivLog] = useState({id:0, name:''});
+  const [itemEditActivLog, setItemEditActivLog] = useState<ActivityLogModel>({
+    id:0, activ_date: '', activ_name: '', activ_value: 0});
  
   // список activs и статус прогрузки
-  const storeActivLogs = useSelector( (store) => store.activsReducer.activLogs); // store
+  const storeActivLogs = useSelector( (store: RootState) => store.activsReducer.activLogs); // store
   // activs после фильтрации
   const [activsFilt, setActivsFilt] = useState(storeActivLogs);
 
   // список activNames
-  const storeActivNamesList = useSelector( (store) => store.activsReducer.activNamesList); // store
-  const [activNameSelect, setActivNameSelect] = useState('All');
+  const {
+    storeActivNamesList,
+    activNameSelected,
+
+    storeActivLogsFiltered,
+    storeActivLogsFilteredPaged,
+
+    storeCurrentPage,
+
+  } = useSelector( (store: RootState) => ({
+    storeActivNamesList:    store.activsReducer.activNamesList,
+    activNameSelected:      store.activsReducer.activNameSelected,
+
+    storeActivLogsFiltered:       store.activsReducer.activLogsFiltered,
+    storeActivLogsFilteredPaged:  store.activsReducer.activLogsFilteredPaged,
+
+    storeCurrentPage: store.activsReducer.currentPage,
+  })); 
 
   // 
   const clickIsNew = () => { setIsNewActivLog(!isNewActivLog); }
-  const selectActivName = (val) => { setActivNameSelect(val); }
-  const handleIsNewActName = (val) => { setIsNewActivName(val) }
-  const handleIsNewActivLog = (val) => { setIsNewActivLog(val) }
+
+  const selectActivName = (val: string) => { 
+    dispatch(actionsActivsRed.setActivNameSelected(val));
+    dispatch(doActivsSearch({}));
+    dispatch( actionsActivsRed.setCurrentPage(0) );
+  } //setActivNameSelect(val);
+  
+  const handleIsNewActName = (val: boolean) => { setIsNewActivName(val) }
+  const handleIsNewActivLog = (val: boolean) => { setIsNewActivLog(val) }
+
   const handleCloseEditActivLog = () => { setIsEditActivLog(false); }
 
   //
-  const handleEditActivLog = (id) => {
+  const handleEditActivLog = (id: number) => {
     let itemActivLogEdit = storeActivLogs.filter( (item) => {
       return (item.id === id);
     })
@@ -48,24 +82,25 @@ export default function PageActivities(props) {
     setIsEditActivLog(true);
   }
 
+  const SetActivePageNum = (val: number) => {
+    dispatch( actionsActivsRed.setCurrentPage(val) );
+  }
+
 
   // saving new activity log
-  const handleSaveNewActivLog = async (dataObj) => {
-    //console.log(dataObj);
+  const handleSaveNewActivLog = async (dataObj: ActivityLogModel) => {
     dispatch(fetchSaveNewActiv(dataObj));
   }
   // updating activity log
-  const handleUpdateActivLog = async (dataObj) => {
-    //console.log(dataObj);
+  const handleUpdateActivLog = async (dataObj: ActivityLogModel) => {
     dispatch(fetchUpdateActivLogById(dataObj));    
   }
   // deleting activity log item by id
-  const handleDeleteActivLog = async (id) => {
-    //console.log(`deleting ${id}`);
+  const handleDeleteActivLog = async (id: number) => {
     dispatch(fetchDeleteActivLogById(id));
   }
 
-  const handleSaveNewActivName = async (dataObj) => {
+  const handleSaveNewActivName = async (dataObj: ActivityModel) => {
     //console.log(dataObj);
     dispatch(fetchSaveNewActivName(dataObj));
   }
@@ -73,7 +108,10 @@ export default function PageActivities(props) {
 
   // ------------------
   // filter activs by activName
-  const doFilterActivs = () => {
+  // https://stackoverflow.com/questions/65321359/how-to-fix-warning-function-makes-the-dependencies-of-useeffect-hook-change
+  // https://reactjs.org/docs/hooks-reference.html#usecallback
+  /*
+  const doFilterActivs = useCallback( () => {
     let bif = storeActivLogs  // from store
       .filter( (item) => {
         if (activNameSelect !== 'All') {
@@ -83,12 +121,15 @@ export default function PageActivities(props) {
         }
       })
       setActivsFilt(bif);
-  }
+  }, [storeActivLogs, activNameSelect])
+  */
+  
 
   useEffect( () => {
     document.title = "WA3: Activities";
-    doFilterActivs();
-  }, [storeActivLogs, doFilterActivs])
+    //doFilterActivs();
+    dispatch(doActivsSearch({}));
+  }, [storeActivLogs/*, doFilterActivs*/])
 
   // -------------------------------------------
   return (
@@ -98,17 +139,20 @@ export default function PageActivities(props) {
       
       <div>
         <h3>Направления</h3> 
-        <button type="button" onClick={doFilterActivs}>Filter ActivNames</button>
+        {/*<button type="button" onClick={doFilterActivs}>Filter ActivNames</button>*/}
         <br/>
         
-        <ULPartsList
+        <AttrSelFilt 
+          attrTitle='ActivNames'
+          attrSelected={activNameSelected}
+          handleSelectAttr={selectActivName}
+          isOpened={true}
           partsArray={storeActivNamesList}
-          part='activ_name'
-          storePartSelected={activNameSelect}
-          selectPart={selectActivName}
+          showId={true}
         />
 
         <br/>
+
         <button className='button-control button-new' onClick={() => { setIsNewActivName(!isNewActivName) }}>Create new activity Name</button>
         {/* компонент - новая ActivName */}
         { (isNewActivName) 
@@ -151,14 +195,31 @@ export default function PageActivities(props) {
       
       <br/><br/>
       {/* компонент - таблица с данными по Activ */}
-      { <ModTable 
-          activs={activsFilt}
+      <Paginator 
+        numOfPages={storeActivLogsFilteredPaged.length}
+        activePageNum={storeCurrentPage}
+        setActivePageNum={SetActivePageNum}
+      />
+
+      {
+        (storeActivLogsFilteredPaged[storeCurrentPage] !== undefined) 
+        ? <>
+        { <ModTable 
+          activs={storeActivLogsFilteredPaged[storeCurrentPage]}
           handleEdit={handleEditActivLog}
           handleDelete={handleDeleteActivLog}
         />
       }
+        </>
+        : <></>
+      }
+
+
+
       <hr/>
 
     </>
   )
 }
+
+export default PageActivities;

@@ -1,17 +1,30 @@
 
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-const initialState = {
+// models
+import { FilesInfoModel, UploadFileModel } from '../models/models';
+
+
+interface UpDownState {
+  uploadStatus: string,
+  filesInfo: FilesInfoModel,
+}
+
+const initialState: UpDownState = {
   uploadStatus: '',
-  filesInfo: '', // {files_list:[...], serve_url:'/f1'}
+  filesInfo: {files_list: [], serve_url: ''},
 }
 
 const upDownReducer = createSlice({
   name: 'upDownReducer', 
   initialState: initialState,
   reducers: {
-    setuploadStatus(state, action) { state.uploadStatus = action.payload },
-    setFilesInfo(state, action) { state.filesInfo = action.payload },
+    setuploadStatus(state, action: PayloadAction<string>) { 
+      state.uploadStatus = action.payload 
+    },
+    setFilesInfo(state, action: PayloadAction<FilesInfoModel>) { 
+      state.filesInfo = action.payload 
+    },
   }
 })
 
@@ -20,19 +33,18 @@ export default upDownReducer.reducer;
 
 export const fetchFilesInfo = createAsyncThunk(
   'data/filesInfo',
-  async (obj, thunkAPI) => {
+  async (obj: Object, thunkAPI) => {
     let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/files_list')
     let data = await resp.json();
-    //console.log('fetchFilesList data=', data);
     thunkAPI.dispatch( actionsUpDownRed.setFilesInfo(data) );
   }
 )
 
 export const filesUpload = createAsyncThunk(
   'data/filesUPload',
-  async (obj, thunkAPI) => {
+  async (obj: UploadFileModel, thunkAPI) => {
     let dt = new Date().toString();
-    thunkAPI.dispatch( actionsUpDownRed.setuploadStatus('in progress ' + dt) );
+    thunkAPI.dispatch( actionsUpDownRed.setuploadStatus('in progress: ' + dt) );
 
     const formData = new FormData();
     // работаем с obj.file из объекта (1й арг функции)
@@ -45,14 +57,12 @@ export const filesUpload = createAsyncThunk(
 
     let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/form_upload', {
       method: 'POST',      
-      body: formData//,
-      //headers: {"Content-Type": "multipart/form-data", 'Access-Control-Allow-Origin': '*'}
+      body: formData,
     })
-    await resp.json(); //let data = 
-    //console.log('data=', data);    
+    await resp.json();
 
     dt = new Date().toString();
-    thunkAPI.dispatch( actionsUpDownRed.setuploadStatus('done ' + dt) );    
+    thunkAPI.dispatch( actionsUpDownRed.setuploadStatus('done: ' + dt) );    
   }
 )
 

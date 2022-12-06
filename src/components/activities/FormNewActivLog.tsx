@@ -1,18 +1,29 @@
 
-import { useState } from "react";
+import { FC, useState } from "react";
+
+// models
+import { ActivityLogModel } from '../../models/models';
 
 /* props:
   - handleSaveNewActiv
 */
 //
-export default function FormNewActivLog(props) {
+
+interface FormNewActivLogProps {
+  handleSaveNewActivLog: (dataObj: ActivityLogModel) => void,
+  handleIsNewActivLog: (val: boolean) => void,
+}
+
+//
+const FormNewActivLog:FC<FormNewActivLogProps> = (props) => {
   const [form_activ_name_id, setForm_activ_name_id] = useState('');
   const [form_activ_norm_id, setForm_activ_norm_id] = useState('');
-  const [form_activ_date, setForm_activ_date] = useState('');
-  const [form_activ_value, setForm_activ_value] = useState('');
+  const [form_activ_date, setForm_activ_date]       = useState('');
+  const [form_activ_value, setForm_activ_value]     = useState('');
 
   const clickSave = () => {
-    let dataObj = {
+    let dataObj: ActivityLogModel = {
+      id: 0,
       activ_name_id: Number(form_activ_name_id), 
       activ_norm_id: Number(form_activ_norm_id), 
       activ_date: form_activ_date,
@@ -46,3 +57,5 @@ export default function FormNewActivLog(props) {
     </div>
   )
 }
+
+export default FormNewActivLog;

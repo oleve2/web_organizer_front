@@ -1,42 +1,49 @@
 import Navigation from "../components/layout/Navigation"
-import { useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-// store thunk
+// store 
+import { RootState, AppDispatch } from "../rtkstore/store";
 import { fetchFilesInfo, filesUpload } from "../rtkstore/upDownReducer";
 
 // style
 import './PageUpDownload.css';
 
-export default function PageUpDownload(props) {
-  const dispatch = useDispatch();
+//
+const PageUpDownload:FC = (props) => {
+  const dispatch = useDispatch<AppDispatch>();
 
-  const opers = ['download', 'upload'];
-  const [operation, setoperation] = useState(opers[0]);
+  const opers: string[] = ['download', 'upload'];
+  const [operation, setoperation] = useState<string>(opers[0]);
 
   // upload
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState<FileList | null>(null);
 
   // store
-  const storeFilesInfo = useSelector( (store) => store.upDownReducer.filesInfo );
-  const storeUplstatus = useSelector( (store) => store.upDownReducer.uploadStatus );
+  const {
+    storeFilesInfo, 
+    storeUplstatus,
+  } = useSelector( (store: RootState) => ({
+    storeFilesInfo: store.upDownReducer.filesInfo,
+    storeUplstatus: store.upDownReducer.uploadStatus,
+  })
+  );
 
   // -----------------------------------
-  const handleChooseMode = (value) => {
+  const handleChooseMode = (value: string) => {
     setoperation(value);
   }
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleFormSubmit = async () => { //event: Event
+    //event.preventDefault();
 
-    if (file !== '') {
+    if (file !== null) {
       // upload files with thunk function
       dispatch(filesUpload({file: file}))
-
       // clear input
-      setFile('');
-      let inp = document.getElementById("input_mult");
-      inp.value = null;
+      setFile(null);
+      let inp = document.getElementById("input_mult") as HTMLInputElement;
+      inp.value = '';
     } else {
       alert('file not chosen!');
     }
@@ -80,7 +87,7 @@ export default function PageUpDownload(props) {
             { (storeFilesInfo.files_list !== undefined)
               ? <>
               { storeFilesInfo.files_list.map( (item) => {
-                return <div key={item}>
+                return <div key={item} style={{marginBottom:'10px'}}>
                   <a href={process.env.REACT_APP_BASE_URL +  storeFilesInfo.serve_url + '/' + item}>{item}</a> {/* +'/f'+ */}
                 </div>  
               }) }              
@@ -99,13 +106,15 @@ export default function PageUpDownload(props) {
 
           <form encType="multipart/form-data">
             <input type="file" multiple id="input_mult"
-            onChange={(e) => {
-              //console.log(e.target.files);
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               let fl = e.target.files;
               setFile(fl);
             }} />
             <br /><br />
-            <button type="submit" onClick={handleFormSubmit}>Submit</button>
+            <button type="button" onClick={(e) => {
+              e.preventDefault();
+              handleFormSubmit();
+            }}>Submit</button>
           </form>
         </div>
       }
@@ -114,5 +123,5 @@ export default function PageUpDownload(props) {
   )
 }
 
-
+export default PageUpDownload;
 

@@ -1,0 +1,14 @@
+
+.divArrt_h3 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.divControlBtn {
+  min-width: 80px;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 0px 5px;
+}
+

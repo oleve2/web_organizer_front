@@ -1,10 +1,15 @@
 import Navigation from '../components/layout/Navigation';
 
-import { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+
 import galaxy from '../assets/galaxy.jpg';
 import squirtel from '../assets/squirtel.jpeg';
 
-export default function PageHome(props) {
+interface PageHomeProps {}
+
+
+
+const PageHome:FC<PageHomeProps> = (props) => {
   const [pic, setPic] = useState(galaxy)
 
   useEffect( () => {
@@ -31,3 +36,5 @@ export default function PageHome(props) {
     </>
   )
 }
+
+export default PageHome;

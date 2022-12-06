@@ -1,5 +1,15 @@
+import { FC } from 'react';
 
-export default function ModTable(props) {
+// models
+import { ActivityLogModel } from '../../models/models';
+
+interface ModTableProps {
+  activs: ActivityLogModel[],
+  handleEdit: (id: number) => void,
+  handleDelete: (id: number) => void,
+}
+
+const ModTable:FC<ModTableProps> = (props) => {
   return (
     <>
     <table>
@@ -37,4 +47,4 @@ export default function ModTable(props) {
   )
 }
 
-
+export default ModTable;

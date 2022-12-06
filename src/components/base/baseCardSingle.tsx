@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navigation from "../layout/Navigation";
 import ReactMarkdown from 'react-markdown'  
@@ -6,33 +6,36 @@ import rehypeRaw from "rehype-raw";
 import { fetchBaseItems } from "../../rtkstore/baseReducer";
 import { useDispatch } from "react-redux";
 
+// store
+import { AppDispatch } from '../../rtkstore/store';
 
-export default function BaseCardSingle(props) {
+// models
+import { ItemModel } from "../../models/models";
+
+interface BaseCardSingleProps {}
+
+
+//
+const BaseCardSingle:FC<BaseCardSingleProps> = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const [card, setCard] = useState('');
+  const [card, setCard] = useState<ItemModel>({id:0, part:'', text:'', theme:'', title:''});
 
-  const [frmPart, setFrmPart] = useState('');
-  const [frmTheme, setFrmTheme] = useState('');
-  const [frmTitle, setFrmTitle] = useState('');
-  const [frmText,  setFrmText] = useState('');
+  const [frmPart, setFrmPart] = useState<string>('');
+  const [frmTheme, setFrmTheme] = useState<string>('');
+  const [frmTitle, setFrmTitle] = useState<string>('');
+  const [frmText,  setFrmText] = useState<string>('');
 
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [delConfirm, setdelConfirm] = useState<boolean>(false);
 
-  useEffect( () => {
-    document.title = `WA3: Card #${id}`;
-  },[id])  
-
+  //
   useEffect( () => {
     async function fetchData() {
-      let resp = await fetch(process.env.REACT_APP_BASE_URL+`/api/v1/post/${id}`, {
-        method: 'GET',
-        //headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-      });
-      let data = await resp.json();
-      //console.log({data});
+      let resp = await fetch(process.env.REACT_APP_BASE_URL+`/api/v1/post/${id}`, {method: 'GET'});
+      let data: ItemModel = await resp.json();
       setCard(data);
 
       setFrmPart(data.part);
@@ -41,47 +44,43 @@ export default function BaseCardSingle(props) {
       setFrmText(data.text);
     };
     fetchData();
+    document.title = `WA3: Card #${id}`;
   }, [id])
 
   //
   const handleSaveChanges = async () => {
-    let dataObj = {
+    let dataObj:ItemModel = {
       id: card.id,
       part: frmPart,
       theme: frmTheme,
       title: frmTitle,
       text: frmText
     }
-    //console.log('saving changes ....'); //, dataObj
 
     let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/postUpdate', {
       method: 'POST',
       body: JSON.stringify(dataObj),
     })
-    //console.log(resp.ok);
     if (!resp.ok) {
       throw new Error(resp.statusText);
     }
 
-    await resp.json(); // const data = 
-    //console.log('getServiceByIdUpgr =', data);
-    dispatch(fetchBaseItems());
+    await resp.json();
+    dispatch(fetchBaseItems({}));
+    setIsEdit(false);
   }
 
   // 
   const handleDelete = async () => {
-    //console.log(`deleting ${card.id}`);
     let resp = await fetch(process.env.REACT_APP_BASE_URL + `/api/v1/postDelete/${card.id}`, {
       method: 'POST'
     })
-    //console.log(resp.ok);
     if (!resp.ok) {
       throw new Error(resp.statusText);
     }
 
-    await resp.json(); // const data = 
-    //console.log('handleDelete =', data);
-    dispatch(fetchBaseItems());
+    await resp.json();
+    dispatch(fetchBaseItems({}));
     navigate('/base');
   }
 
@@ -124,8 +123,19 @@ export default function BaseCardSingle(props) {
     </>
     }
     <br/>
-    <button className="button-control button-delete" onClick={handleDelete}>Delete Post</button>
+    <button className="button-control button-delete" onClick={() => {setdelConfirm(true)}}>Delete Post</button>
+    { delConfirm && 
+    <div>
+      <div>confirm delete of card#{card.id}</div> 
+      <button onClick={handleDelete}>YES</button> <br />
+      <button onClick={() => {setdelConfirm(false)}}>NO</button>
+    </div>
+    }
+
+
     {/* */}
     </>
   )
 }
+
+export default BaseCardSingle;

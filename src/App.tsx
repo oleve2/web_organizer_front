@@ -1,8 +1,9 @@
 import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 
 // pages
 import PageHome from './pages/PageHome';
@@ -17,6 +18,7 @@ import BaseCardNew from './components/base/baseCardNew';
 import Login from './components/auth/Login';
 
 // store
+import { RootState, AppDispatch } from './rtkstore/store';
 import { fetchBaseItems } from './rtkstore/baseReducer';
 import { fetchActivLogs } from './rtkstore/activsReducer';
 import { datesSetupOther } from './rtkstore/analyticReducer';
@@ -27,39 +29,43 @@ import { setLoginToken } from './rtkstore/authReducer';
 // https://stackoverflow.com/questions/70098392/react-chartjs-2-with-chartjs-3-error-arc-is-not-a-registered-element
 import 'chart.js/auto';
 
-function App() {
-  const dispatch = useDispatch();
-  const storeToken = useSelector( (store) => store.authReducer.token)
+const App:FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const storeToken = useSelector( (store: RootState) => store.authReducer.token)
 
+  //
   useEffect( () => {
     // 
-    dispatch(fromLS());
+    dispatch(fromLS({}));
     // data fetch
-    dispatch(fetchBaseItems());
-    dispatch(fetchActivLogs());
+    dispatch(fetchBaseItems({}));
+    dispatch(fetchActivLogs({}));
     
     // calculate dates for analytics
-    dispatch( datesSetupOther() );
+    dispatch( datesSetupOther({}) );
   }, [dispatch])
 
-  const validateLogPass = async (login, pass) => {
+  //
+  const validateLogPass = async (login: string, pass: string) => {
     if (login === process.env.REACT_APP_LOGIN && pass === process.env.REACT_APP_PASSWORD) {
       let token = login+'_authenticated';
-      dispatch(setLoginToken(login, token));  // to store and ls
+      dispatch(setLoginToken({login: login, token:token}));  // to store and ls
     } else {
       alert('Incorrect logini/password!');
     }
   }
 
-  if (storeToken === '') {
-    return <Login validateLogPass={validateLogPass}/>
-  }
-
-  return (
+  //
+  return (<>
+    { (storeToken === '') 
+    ? <>
+      <Login validateLogPass={validateLogPass}/>
+    </>
+    : <>
     <div className='wrapper'>
       <BrowserRouter>
         <Routes>
-          <Route path='/login' element={<Login/>}></Route>
+          <Route path='/login' element={<Login />}></Route>
           <Route path='/' element={<PageHome/>}></Route>
           <Route path='/base' element={<PageBase/>}></Route>
           <Route path='/base/new' element={<BaseCardNew/>}></Route>
@@ -69,7 +75,10 @@ function App() {
           <Route path='/updownload' element={<PageUpDownload/>}></Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </div>    
+    </>
+    }
+  </>
   );
 }
 

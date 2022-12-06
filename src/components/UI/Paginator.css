@@ -1,0 +1,17 @@
+
+.div_pages {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.div_pagesItem {
+  padding: 10px;
+  border: 1px solid black;
+  margin: 5px;
+}
+
+.div_pagesItem__active {
+  background-color: lightblue;
+}
+
+

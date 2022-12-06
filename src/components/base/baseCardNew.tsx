@@ -1,5 +1,5 @@
 import Navigation from "../layout/Navigation"
-import { useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchBaseItems } from "../../rtkstore/baseReducer";
@@ -7,19 +7,28 @@ import { fetchBaseItems } from "../../rtkstore/baseReducer";
 // styles
 import './baseCardNew.css';
 
+// store
+import { AppDispatch} from '../../rtkstore/store';
+
+// models
+import { ItemModel } from '../../models/models';
+
+interface BaseCardNewProps {}
+
+
 //
-export default function BaseCardNew(props) {
+const BaseCardNew:FC<BaseCardNewProps> = (props) => {
   const [frmPart, setFrmPart]   = useState('');
   const [frmTheme, setFrmTheme] = useState('');
   const [frmTitle, setFrmTitle] = useState('');
   const [frmText,  setFrmText]  = useState('');
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   
   //
   const handleSaveNewPost = async () => {
-    let dataObj = {
+    let dataObj: ItemModel = {
       id:     0,
       part:   frmPart,
       theme:  frmTheme,
@@ -37,9 +46,9 @@ export default function BaseCardNew(props) {
       throw new Error(resp.statusText);
     }
 
-    await resp.json(); //const data = 
+    await resp.json();
     //console.log('SaveNewPost fetch data=', data);
-    dispatch(fetchBaseItems());
+    dispatch(fetchBaseItems({}));
     navigate('/base');
   }
 
@@ -81,3 +90,5 @@ export default function BaseCardNew(props) {
     </>
   )
 }
+
+export default BaseCardNew;

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -16,20 +16,18 @@ import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 // images
 import menuBlue from '../../assets/menu_blue.png';
 
-// rtk
+// store
 import { logoutAndClearLS } from "../../rtkstore/authReducer";
+import { RootState, AppDispatch } from '../../rtkstore/store';
 
+interface NavigationProps {}
 
-export default function Navigation(props) {
-  const dispatch = useDispatch();
-  //const navigate = useNavigate();
-  const storeLogin = useSelector( (store) => store.authReducer.login);
+//
+const Navigation:FC<NavigationProps> = (props) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const storeLogin = useSelector( (store: RootState) => store.authReducer.login);
 
-  const doLogout = () => {
-    dispatch( logoutAndClearLS() );
-  }
-
-  const [isOpen, setisOpen] = useState(false);
+  const [isOpen, setisOpen] = useState<boolean>(false);
   const newMenu = [
     {name: 'Home', lnk: '/'},
     {name: 'Base', lnk: '/base'},
@@ -39,10 +37,15 @@ export default function Navigation(props) {
     {name: 'UpDownload', lnk: '/updownload'},
   ]
 
-  const toggleDrawer = (open) => {
+  const toggleDrawer = (open: boolean) => {
     setisOpen(open);
   }
+
+  const doLogout = () => {
+    dispatch( logoutAndClearLS({}) );
+  }
   
+  //
   return (
     <>
     <div className="nav-header">
@@ -76,7 +79,7 @@ export default function Navigation(props) {
         </List>
         <Divider />
         </Box>  
-      </Drawer>{/**/}
+      </Drawer>
     
       <ul className="nav-header nav-logins">
         { (storeLogin !== '') ? <li className="nav-login-info"> <div>logged as: {storeLogin}</div> </li> : <></> }
@@ -87,3 +90,5 @@ export default function Navigation(props) {
     </>
   )
 }
+
+export default Navigation;

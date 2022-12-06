@@ -1,8 +1,13 @@
-import { useState } from "react"
+import { FC, useState } from "react"
 
-export default function Login(props) {
-  const [login, setLogin] = useState('');
-  const [pass, setPass] = useState('');
+interface LoginProps {
+  validateLogPass?: (login: string, pass: string) => void
+}
+
+//
+const Login:FC<LoginProps> = (props) => {
+  const [login, setLogin] = useState<string>('');
+  const [pass, setPass] = useState<string>('');
 
   return (
     <div className='wrapper'>
@@ -19,7 +24,7 @@ export default function Login(props) {
         <div>
           <button type="submit" onClick={(e) => { 
             e.preventDefault();
-            props.validateLogPass(login, pass) 
+            props.validateLogPass!(login, pass) 
           }}>Submit</button>
         </div>
       </form>    
@@ -27,4 +32,4 @@ export default function Login(props) {
   )
 }
 
-
+export default Login;
