@@ -7,6 +7,7 @@ import Navigation from '../components/layout/Navigation';
 import BaseCard   from '../components/base/baseCard';
 import Paginator from '../components/UI/Paginator';
 import AttrSelFilt from '../components/UI/AttrSelFilt'; 
+import TagCloud from '../components/tagcloud/TagCloud';
 
 // models
 import { ItemModel } from '../models/models';
@@ -39,6 +40,10 @@ const PageBase:FC<PageBaseProps> = (props) => {
     storeSearchStr,
     storeCurrentPage,
     storeitemsFilteredPaged,
+
+    flgIsOpenParts,
+    flgIsOpenThemes,
+    flgIsOpenTitles,
   } = useSelector( (store: RootState) => ({
     baseItems:            store.baseReducer.items,
 
@@ -53,6 +58,10 @@ const PageBase:FC<PageBaseProps> = (props) => {
     storeSearchStr:       store.baseReducer.searchStr,
     storeCurrentPage:     store.baseReducer.currentPage,
     storeitemsFilteredPaged: store.baseReducer.itemsFilteredPaged,
+
+    flgIsOpenParts: store.baseReducer.flgIsOpenParts,
+    flgIsOpenThemes: store.baseReducer.flgIsOpenThemes,
+    flgIsOpenTitles: store.baseReducer.flgIsOpenTitles,    
   }))
 
   const SetActivePageNum = (val: number) => {
@@ -73,6 +82,17 @@ const PageBase:FC<PageBaseProps> = (props) => {
     dispatch(actionsBaseRed.setSearchStr(val));
   }
 
+  // set isOpened for parts, themes, titles
+  const storeSetIsOpenedParts = () => {
+    dispatch( actionsBaseRed.setflgIsOpenParts(!flgIsOpenParts) );
+  }
+  const storeSetIsOpenedThemes = () => {
+    dispatch( actionsBaseRed.setflgIsOpenThemes(!flgIsOpenThemes) );
+  }
+  const storeSetIsOpenedTitles = () => {
+    dispatch( actionsBaseRed.setflgIsOpenTitles(!flgIsOpenTitles) );
+  }  
+
   //
   useEffect( () => {
     document.title = "WA3: KnowBase";
@@ -81,8 +101,10 @@ const PageBase:FC<PageBaseProps> = (props) => {
 
 
   // ---------------------
-  return (
-    <>
+  return (<>
+  {/*<DndProvider backend={HTML5Backend}>
+  </DndProvider>  */}
+    
     <Navigation/>
     <hr/>    
 
@@ -96,14 +118,16 @@ const PageBase:FC<PageBaseProps> = (props) => {
       >
         Search and Filter!
     </button>
-
+    
+    <TagCloud allowTagsSelect={true}/>
 
     <AttrSelFilt 
       attrTitle='Parts'
       attrSelected={storePartSelected}
       partsArray={partsArray}
       handleSelectAttr={selectPart}
-      isOpened={true}
+      isOpened={flgIsOpenParts}
+      storeSetIsOpened={storeSetIsOpenedParts}
     />
 
     <AttrSelFilt 
@@ -111,7 +135,8 @@ const PageBase:FC<PageBaseProps> = (props) => {
       attrSelected={storeThemeSelected}
       partsArray={themesArray}
       handleSelectAttr={selectTheme}
-      isOpened={false}
+      isOpened={flgIsOpenThemes}
+      storeSetIsOpened={storeSetIsOpenedThemes}
     />
 
     <AttrSelFilt 
@@ -119,7 +144,8 @@ const PageBase:FC<PageBaseProps> = (props) => {
       attrSelected={storeTitleSelected}
       partsArray={titlesArrray}
       handleSelectAttr={selectTitle}
-      isOpened={false}
+      isOpened={flgIsOpenTitles}
+      storeSetIsOpened={storeSetIsOpenedTitles}
     />
 
     <h3>Cards</h3>
@@ -144,6 +170,7 @@ const PageBase:FC<PageBaseProps> = (props) => {
       }
     </ul>
     </>
+  
   )
 }
 

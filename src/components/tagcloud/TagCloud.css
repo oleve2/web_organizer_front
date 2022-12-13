@@ -1,0 +1,58 @@
+
+.tc_wrapper {
+  /*border: 1px solid black;
+  padding: 5px;*/
+}
+
+.tc_tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0px 20px 0px;
+
+}
+
+.tc_tagSingle {
+  border: 1px solid black;
+  padding: 3px;
+  margin-right: 5px;
+}
+
+.tc_tagSingle__active {
+  background-color: lightblue;
+}
+
+
+
+.tc_menuDiv {
+  border: 1px solid lightblue;
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  min-width: 100px;
+  min-height: 100px;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+}
+
+
+.tc_tagsDropDivTmp {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin-top: 20px;
+  /**/background-color: bisque;
+  min-width: 150px;
+  min-height: 30px;
+  width: fit-content;
+}
+
+
+.tc_divBtn {
+  min-width: 80px;
+  width: fit-content;
+  border: 1px solid black;
+  padding: 5px;
+  /*margin: 0px 5px;*/
+}
+

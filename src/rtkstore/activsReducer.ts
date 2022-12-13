@@ -19,6 +19,8 @@ interface ActivsState {
   currentPage: number,
   maxPerPage: number,
   numOfPages: number,
+
+  flgIsOpenActivs: boolean,
 }
 
 const initialState: ActivsState = {
@@ -31,7 +33,9 @@ const initialState: ActivsState = {
 
   currentPage: 0,
   maxPerPage: 10,
-  numOfPages: 0,    
+  numOfPages: 0,   
+  
+  flgIsOpenActivs: false,
 }
 
 const activsReducer = createSlice({
@@ -64,6 +68,11 @@ const activsReducer = createSlice({
     },
     setNumOfPages(state, action: PayloadAction<number>) {
       state.numOfPages = action.payload;
+    },     
+    
+    // flag isOpen Activs
+    setflgIsOpenActivs(state, action: PayloadAction<boolean>) {
+      state.flgIsOpenActivs = action.payload;
     },        
   }
 })

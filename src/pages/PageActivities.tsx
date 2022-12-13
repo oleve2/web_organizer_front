@@ -48,6 +48,7 @@ const PageActivities:FC = (props) => {
     storeActivLogsFilteredPaged,
 
     storeCurrentPage,
+    flgIsOpenActivs,
 
   } = useSelector( (store: RootState) => ({
     storeActivNamesList:    store.activsReducer.activNamesList,
@@ -57,6 +58,7 @@ const PageActivities:FC = (props) => {
     storeActivLogsFilteredPaged:  store.activsReducer.activLogsFilteredPaged,
 
     storeCurrentPage: store.activsReducer.currentPage,
+    flgIsOpenActivs: store.activsReducer.flgIsOpenActivs,
   })); 
 
   // 
@@ -72,6 +74,11 @@ const PageActivities:FC = (props) => {
   const handleIsNewActivLog = (val: boolean) => { setIsNewActivLog(val) }
 
   const handleCloseEditActivLog = () => { setIsEditActivLog(false); }
+
+  // change active show/hide div
+  const handleChangeActivsChange = () => {
+    dispatch(actionsActivsRed.setflgIsOpenActivs(!flgIsOpenActivs));
+  }
 
   //
   const handleEditActivLog = (id: number) => {
@@ -146,9 +153,10 @@ const PageActivities:FC = (props) => {
           attrTitle='ActivNames'
           attrSelected={activNameSelected}
           handleSelectAttr={selectActivName}
-          isOpened={true}
+          isOpened={flgIsOpenActivs}
           partsArray={storeActivNamesList}
           showId={true}
+          storeSetIsOpened={handleChangeActivsChange}
         />
 
         <br/>

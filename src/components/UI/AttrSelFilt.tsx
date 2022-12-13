@@ -13,18 +13,19 @@ interface AttrSelFiltProps {
   partsArray: PartModel[],
   handleSelectAttr: (val: string) => void, // selectPart
   isOpened: boolean,
+  storeSetIsOpened?: () => void,
   showId?:boolean,
 }
 
 //
 const AttrSelFilt:FC<AttrSelFiltProps> = (props) => {
   const [filterStr, setfilterStr] = useState<string>('');
-  const [isOpen, setIsOpen] = useState<boolean>(props.isOpened);
+  //const [isOpen, setIsOpen] = useState<boolean>(props.isOpened);
 
   return (<>
     <div style={{display:'flex', marginTop:'10px'}}>
-      <div className='divControlBtn' onClick={() => { setIsOpen(!isOpen) }}>
-        { isOpen ? 'hide' : 'show more' }
+      <div className='divControlBtn' onClick={props.storeSetIsOpened}>
+        { props.isOpened ? 'hide' : 'show more' }
       </div>
 
       <div className='divControlBtn' onClick={() => { props.handleSelectAttr('All') }}>Reset to 'All'</div>
@@ -32,7 +33,7 @@ const AttrSelFilt:FC<AttrSelFiltProps> = (props) => {
       <div className='divArrt_h3'>{props.attrTitle} /{props.attrSelected}</div>
     </div>
 
-    { isOpen && 
+    { props.isOpened && 
     <div style={{border:'1px solid black', padding:'10px', marginTop:'5px'}}>
       <input type="text" onChange={(e) => { setfilterStr(e.target.value) }} />
 

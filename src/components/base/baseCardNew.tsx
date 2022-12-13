@@ -33,7 +33,8 @@ const BaseCardNew:FC<BaseCardNewProps> = (props) => {
       part:   frmPart,
       theme:  frmTheme,
       title:  frmTitle,
-      text:   frmText
+      text:   frmText,
+      tags_list: JSON.stringify([]),
     }
     //console.log('saving post', dataObj);
 

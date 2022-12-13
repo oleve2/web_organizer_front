@@ -7,6 +7,9 @@ export interface ItemModel {
   theme: string,
   part: string,
   prodLink?: string,
+
+  tags_list: string,              // from api
+  tags_list_json?: TCTagModel[],  // converted to Object
 }
 
 export interface PartModel {
@@ -50,6 +53,13 @@ export interface ActivityLogModel {
   activ_name?: string,
 }
 
+// tagcloud reducer models ------------------------------
+export interface TCTagModel {
+  id: number,
+  name: string,
+  color?: string,
+}
+
 
 // page analytic models ------------------------------------
 // request for data
@@ -90,4 +100,10 @@ export interface RepIndivGraphsModel {
   datasets: DataActsModel[],
 }
 
+
+
+// draggable  -------------------------------------------------
+/*export interface TCItemModel {
+  item: string,
+}*/
 
