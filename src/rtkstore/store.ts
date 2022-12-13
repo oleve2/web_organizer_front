@@ -7,6 +7,7 @@ import activsReducer from './activsReducer';
 import analyticReducer from './analyticReducer';
 import authReducer from './authReducer';
 import upDownReducer from './upDownReducer';
+import tagCloudReducer from './tagCloudReducer';
 
 //
 export const store = configureStore({
@@ -16,6 +17,7 @@ export const store = configureStore({
     analyticReducer: analyticReducer,
     authReducer: authReducer,
     upDownReducer: upDownReducer,
+    tagCloudReducer: tagCloudReducer,
   }
 })
 

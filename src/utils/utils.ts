@@ -1,5 +1,6 @@
 
-import { PartModel, ItemModel} from "../models/models";
+import { iteratorSymbol } from "immer/dist/internal";
+import { PartModel, ItemModel, TCTagModel} from "../models/models";
 
 
 
@@ -78,6 +79,45 @@ export const DivideArrayOnParts = <T>(array: T[], cntItemsInPart: number, numOfP
   //console.log('arrSliced=', arrSliced)
   return arrSliced;
 }
+
+
+export const TCTag_checkTagIdInTagList = (tagList: TCTagModel[], tag: TCTagModel): boolean => {
+  for (let i=0; i < tagList.length; i++) {
+    if (tagList[i].id === tag.id) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export const IfOneTagExistsInItem = (oneItem: ItemModel, tags: TCTagModel[]): boolean => {
+  for (let i=0; i < oneItem.tags_list_json!.length; i++) {
+    for (let j=0; j < tags.length; j++) {
+      if (oneItem.tags_list_json![i].id === tags[j].id) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+
+
+
+export const TCTag_removeTagFromTagListById = (tagList: TCTagModel[], tag: TCTagModel): TCTagModel[] => {
+  let newArr: TCTagModel[] = [];
+  //console.log('array in', tagList);
+  for (let i=0; i < tagList.length; i++)  {
+    //console.log(tagList[i], tagList[i].id !== tag.id);
+    if (tagList[i].id !== tag.id) {
+      newArr.push(tagList[i]);
+    }
+  }
+  //console.log('array out', newArr);
+  return newArr;
+}
+
+
 
 
 

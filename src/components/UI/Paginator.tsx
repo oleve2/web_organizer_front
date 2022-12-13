@@ -31,7 +31,7 @@ const Paginator = <T,>(props: React.PropsWithChildren<PaginatorProps<T>>) => {
 
       { pagesArr.map( (item) => {
         return <div key={item} 
-          className={'div_pagesItem' + (props.activePageNum == item ? ' div_pagesItem__active' : '' )  }
+          className={'div_pagesItem' + (props.activePageNum === item ? ' div_pagesItem__active' : '' )  }
           onClick={() => { props.setActivePageNum(item) }}
         >
           {item+1}

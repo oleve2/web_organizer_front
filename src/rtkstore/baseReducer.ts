@@ -4,11 +4,14 @@ import { CalcPartsWithCnts, AddLink } from "../utils/utils";
 import { RootState } from "./store";
 
 // utils
-import { calcNumOfPages, DivideArrayOnParts } from "../utils/utils";
+import { 
+  calcNumOfPages, DivideArrayOnParts,
+  IfOneTagExistsInItem,
+} from "../utils/utils";
 
 
 // models
-import { ItemModel } from "../models/models";
+import { ItemModel, TCTagModel } from "../models/models";
 
 
 interface BaseState {
@@ -29,6 +32,14 @@ interface BaseState {
   currentPage: number,
   maxPerPage: number,
   numOfPages: number,
+
+  // tags list from TagCloud
+  tagsSelectedList: TCTagModel[],
+
+  // pageBase - flags for opened searchparts
+  flgIsOpenParts: boolean,
+  flgIsOpenThemes: boolean,
+  flgIsOpenTitles: boolean,
 }
 
 
@@ -50,6 +61,12 @@ const initialState: BaseState = {
   currentPage: 0,
   maxPerPage: 10,
   numOfPages: 0,
+
+  tagsSelectedList: [],
+
+  flgIsOpenParts: false,  
+  flgIsOpenThemes: false,  
+  flgIsOpenTitles: false,  
 }
 
 const baseReducer = createSlice({
@@ -104,7 +121,21 @@ const baseReducer = createSlice({
       state.numOfPages = action.payload;
     },      
 
-   
+    // tag list
+    setTagsSelectedList(state, action: PayloadAction<TCTagModel[]>) {
+      state.tagsSelectedList = action.payload;
+    },
+
+    // pageBase - flags for opened searchparts
+    setflgIsOpenParts(state, action: PayloadAction<boolean>) {
+      state.flgIsOpenParts = action.payload;
+    },    
+    setflgIsOpenThemes(state, action: PayloadAction<boolean>) {
+      state.flgIsOpenThemes = action.payload;
+    },  
+    setflgIsOpenTitles(state, action: PayloadAction<boolean>) {
+      state.flgIsOpenTitles = action.payload;
+    },          
   }
 })
 
@@ -117,9 +148,12 @@ export const fetchBaseItems = createAsyncThunk(
   'data/fetchBaseItems',
   async (obj: Object, thunkAPI) => {
     let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/allPosts');
-    let data: ItemModel[] = await resp.json();    
+    let data: ItemModel[] = await resp.json();
 
-    let dataWithlink = AddLink(data, '/base/');  
+    let dataWithlink_B1 = AddLink(data, '/base/');  
+    let dataWithlink = dataWithlink_B1.map( (item) => {
+      return {...item, tags_list_json: JSON.parse(item.tags_list)}
+    })
     thunkAPI.dispatch(actionsBaseRed.setItems(dataWithlink)); 
     
     let parts = CalcPartsWithCnts<ItemModel>(dataWithlink, 'part');
@@ -167,6 +201,15 @@ export const doSearchStore = createAsyncThunk(
           || item.text.toLowerCase().includes(searchStr.toLowerCase()) 
           )
       })
+      .filter( (item) => {
+        let tagsSelectedList = appState.baseReducer.tagsSelectedList;
+        if (tagsSelectedList.length == 0) {
+          return item;
+        } else {
+          return IfOneTagExistsInItem(item, tagsSelectedList);
+        }
+      })
+
     // set filtered
     thunkAPI.dispatch( actionsBaseRed.setItemsFiltered(baseItemsFiltered) );
       
@@ -187,7 +230,6 @@ export const doSearchStore = createAsyncThunk(
     thunkAPI.dispatch(actionsBaseRed.setTitlessArray(titles));  
     
     thunkAPI.dispatch(actionsBaseRed.setCurrentPage(0));  
-    
   }
 )
 

@@ -1,9 +1,13 @@
 import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { FC, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+// drag and drop enable
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 // pages
 import PageHome from './pages/PageHome';
@@ -17,10 +21,14 @@ import BaseCardSingle from './components/base/baseCardSingle';
 import BaseCardNew from './components/base/baseCardNew';
 import Login from './components/auth/Login';
 
+// hooks
+import useWindowDimensions from './hooks/useWindowDimensions';
+
 // store
 import { RootState, AppDispatch } from './rtkstore/store';
 import { fetchBaseItems } from './rtkstore/baseReducer';
 import { fetchActivLogs } from './rtkstore/activsReducer';
+import { fetchTCTags } from './rtkstore/tagCloudReducer';
 import { datesSetupOther } from './rtkstore/analyticReducer';
 
 import { fromLS } from './rtkstore/authReducer';
@@ -32,6 +40,8 @@ import 'chart.js/auto';
 const App:FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const storeToken = useSelector( (store: RootState) => store.authReducer.token)
+  const windim = useWindowDimensions();
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   //
   useEffect( () => {
@@ -40,10 +50,22 @@ const App:FC = () => {
     // data fetch
     dispatch(fetchBaseItems({}));
     dispatch(fetchActivLogs({}));
+    dispatch(fetchTCTags({}));
     
     // calculate dates for analytics
     dispatch( datesSetupOther({}) );
   }, [dispatch])
+
+  useEffect( () => {
+    if (windim !== undefined) {
+      if (windim.width! < 900) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false)
+      }
+      //console.log(`isMobile=${isMobile}`);
+    }
+  },[windim, isMobile])  
 
   //
   const validateLogPass = async (login: string, pass: string) => {
@@ -55,8 +77,10 @@ const App:FC = () => {
     }
   }
 
+  // react dnd backends https://stackoverflow.com/questions/57203397/reactdnd-touch-backend
   //
   return (<>
+  <DndProvider backend={(isMobile) ?TouchBackend :HTML5Backend} options={{ enableMouseEvents: true }}>
     { (storeToken === '') 
     ? <>
       <Login validateLogPass={validateLogPass}/>
@@ -78,6 +102,7 @@ const App:FC = () => {
     </div>    
     </>
     }
+  </DndProvider>
   </>
   );
 }

@@ -1,0 +1,12 @@
+
+.tagOnCard_wrapper {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tagOnCard {
+  border: 1px solid black;
+  padding: 2px;
+  margin-right: 5px;
+}
