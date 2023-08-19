@@ -1,18 +1,43 @@
 
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
+// store
+import { RootState } from "./store";
+
 // models
-import { FilesInfoModel, UploadFileModel } from '../models/models';
+import { FilesInfoModel, UploadFileModel, IFileDownld, FilesInfoModelFilteredPaged } from '../models/models';
+import { calcNumOfPages } from "../utils/utils";
+
+// utils
+import { DivideArrayOnParts } from "../utils/utils";
+
 
 
 interface UpDownState {
   uploadStatus: string,
+  searchStr: string,
   filesInfo: FilesInfoModel,
+  filesInfoFiltered: FilesInfoModel,
+  filesInfoFilteredPaginated: FilesInfoModelFilteredPaged,
+
+  // divide to pages
+  currentPage: number,
+  maxPerPage: number,
+  numOfPages: number,  
+  
 }
 
 const initialState: UpDownState = {
   uploadStatus: '',
+  searchStr: '',
   filesInfo: {files_list: [], serve_url: ''},
+  filesInfoFiltered: {files_list: [], serve_url: ''},
+  filesInfoFilteredPaginated: {files_list: [], serve_url: ''},
+
+  // divide to pages
+  currentPage: 0,
+  maxPerPage: 10,
+  numOfPages: 0,    
 }
 
 const upDownReducer = createSlice({
@@ -25,6 +50,27 @@ const upDownReducer = createSlice({
     setFilesInfo(state, action: PayloadAction<FilesInfoModel>) { 
       state.filesInfo = action.payload 
     },
+    setsearchStr(state, action: PayloadAction<string>) {
+      state.searchStr = action.payload
+    },
+
+    setfilesInfoFiltered(state, action: PayloadAction<FilesInfoModel>) {
+      state.filesInfoFiltered = action.payload;
+    },
+    setfilesInfoFilteredPaged(state, action: PayloadAction<FilesInfoModelFilteredPaged>) {
+      state.filesInfoFilteredPaginated = action.payload;
+    },    
+
+    // divide to pages
+    setCurrentPage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
+    },   
+    setMaxPerPage(state, action: PayloadAction<number>) {
+      state.maxPerPage = action.payload;
+    },
+    setNumOfPages(state, action: PayloadAction<number>) {
+      state.numOfPages = action.payload;
+    },  
   }
 })
 
@@ -37,8 +83,49 @@ export const fetchFilesInfo = createAsyncThunk(
     let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/files_list')
     let data = await resp.json();
     thunkAPI.dispatch( actionsUpDownRed.setFilesInfo(data) );
+    thunkAPI.dispatch( filterPageFilesArray({}) );
   }
 )
+
+export const filterPageFilesArray = createAsyncThunk(
+  'data/filterFilesArray', 
+  async (obj: Object, thunkAPI) => {
+    const appState = thunkAPI.getState() as RootState;
+    let searchStr = appState.upDownReducer.searchStr;
+    let fileInfoArr = appState.upDownReducer.filesInfo;
+
+    // filter
+    let FI_filt: IFileDownld[] = [];
+    if (searchStr === "") {
+      FI_filt = fileInfoArr.files_list;
+    } else {
+      FI_filt = fileInfoArr.files_list.filter( (item) => {
+        return item.file_name.toLowerCase().includes(searchStr.toLowerCase());
+      })
+    }
+    let fileInfoArrFilt: FilesInfoModel = {files_list: FI_filt, serve_url: fileInfoArr.serve_url};
+    thunkAPI.dispatch(actionsUpDownRed.setfilesInfoFiltered(fileInfoArrFilt));
+
+    // calc numOfPages
+    let numOfPages = calcNumOfPages<IFileDownld>(fileInfoArrFilt.files_list, appState.upDownReducer.maxPerPage);
+    thunkAPI.dispatch( actionsUpDownRed.setNumOfPages(numOfPages) );
+
+    // slicing to pages
+    let FI_filtered_paged: IFileDownld[][] = DivideArrayOnParts<IFileDownld>(
+      fileInfoArrFilt.files_list, 
+      appState.upDownReducer.maxPerPage,
+      numOfPages,
+    );
+    let FI_Filt_Paged: FilesInfoModelFilteredPaged = {
+      serve_url: fileInfoArr.serve_url,
+      files_list: FI_filtered_paged,
+    }
+    thunkAPI.dispatch( actionsUpDownRed.setfilesInfoFilteredPaged(FI_Filt_Paged) );
+    
+    thunkAPI.dispatch(actionsUpDownRed.setCurrentPage(0)); 
+  } 
+)
+
 
 export const filesUpload = createAsyncThunk(
   'data/filesUPload',

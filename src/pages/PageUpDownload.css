@@ -25,6 +25,10 @@
 
 .divUpload {
   margin-top: 20px;
+}
 
+.downlds_wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
 

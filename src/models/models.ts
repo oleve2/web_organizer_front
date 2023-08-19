@@ -19,8 +19,18 @@ export interface PartModel {
 }
 
 // base reducer models ------------------------------
+export interface IFileDownld {
+  file_name: string,
+  file_isdir: boolean,
+}
+
 export interface FilesInfoModel {
-  files_list: string[],
+  files_list: IFileDownld[],
+  serve_url: string,
+}
+
+export interface FilesInfoModelFilteredPaged {
+  files_list: IFileDownld[][],
   serve_url: string,
 }
 

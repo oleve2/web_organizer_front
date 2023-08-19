@@ -26,12 +26,11 @@ const PageHome:FC<PageHomeProps> = (props) => {
     <hr/>    
 
     <div className='home-wrapper'>
-      <h2 className='centered'>Главная страница</h2>
-      <img className='centered home-img' 
+      <p className='text_centered'>Главная ст<span onClick={changePic}>р</span>аница</p> 
+      
+      <img className='text_centered home-img' 
         src={pic} alt='pic' 
-        onClick={changePic}
       />
-
     </div>
     </>
   )

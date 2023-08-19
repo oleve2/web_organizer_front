@@ -15,6 +15,7 @@ import PageBase from './pages/PageBase';
 import PageActivities from './pages/PageActivities';
 import PageAnalyticsByOne from './pages/PageAnalytics';
 import PageUpDownload from './pages/PageUpDownload';
+import PageD3 from './pages/PageD3';
 
 // components
 import BaseCardSingle from './components/base/baseCardSingle';
@@ -97,6 +98,7 @@ const App:FC = () => {
           <Route path='/activities_manage' element={<PageActivities/>}></Route>
           <Route path='/analytics' element={<PageAnalyticsByOne/>}></Route>
           <Route path='/updownload' element={<PageUpDownload/>}></Route>
+          <Route path='/d3_showcase' element={<PageD3/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>    

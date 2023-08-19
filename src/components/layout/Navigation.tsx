@@ -35,6 +35,7 @@ const Navigation:FC<NavigationProps> = (props) => {
     {name: 'Activities', lnk: '/activities_manage'},
     {name: 'Analytics', lnk: '/analytics'},
     {name: 'UpDownload', lnk: '/updownload'},
+    {name: 'D3JS Showcase', lnk: '/d3_showcase'},
   ]
 
   const toggleDrawer = (open: boolean) => {
