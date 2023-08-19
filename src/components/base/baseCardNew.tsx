@@ -3,12 +3,13 @@ import { FC, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchBaseItems } from "../../rtkstore/baseReducer";
+import { useSelector } from "react-redux";
 
 // styles
 import './baseCardNew.css';
 
 // store
-import { AppDispatch} from '../../rtkstore/store';
+import { AppDispatch, RootState} from '../../rtkstore/store';
 
 // models
 import { ItemModel } from '../../models/models';
@@ -18,8 +19,18 @@ interface BaseCardNewProps {}
 
 //
 const BaseCardNew:FC<BaseCardNewProps> = (props) => {
-  const [frmPart, setFrmPart]   = useState('');
-  const [frmTheme, setFrmTheme] = useState('');
+  // store
+  const {
+    storePart,
+    storeTheme,
+  } = useSelector( (store: RootState) => ({
+    storePart: store.baseReducer.partSelected,
+    storeTheme: store.baseReducer.themeSelected,
+  })
+  );
+
+  const [frmPart, setFrmPart]   = useState( (storePart === 'All') ? '' : storePart );
+  const [frmTheme, setFrmTheme] = useState( (storeTheme === 'All') ? '' : storeTheme );
   const [frmTitle, setFrmTitle] = useState('');
   const [frmText,  setFrmText]  = useState('');
 
@@ -74,6 +85,12 @@ const BaseCardNew:FC<BaseCardNewProps> = (props) => {
     <div className="carditem_wrapper"> 
       <label>Title:</label>
       <input value={frmTitle}  onChange={(e) => { setFrmTitle(e.target.value) }}/> 
+    </div>
+    <div>
+      Disclaimer! If you want "Part" and "Theme" to be selected automatically - select them in the main BASE menu.
+    </div>
+    <div>
+      if you select "All" - no text would be substituted.
     </div>
     <br/>
     <div className="carditem__textwrapper">

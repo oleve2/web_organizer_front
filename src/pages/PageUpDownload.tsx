@@ -5,6 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 // store 
 import { RootState, AppDispatch } from "../rtkstore/store";
 import { fetchFilesInfo, filesUpload } from "../rtkstore/upDownReducer";
+import { actionsUpDownRed } from "../rtkstore/upDownReducer";
+import { filterPageFilesArray } from "../rtkstore/upDownReducer";
+
+// components
+import DLItem from "../components/updownload/DLItem";
+import Paginator from "../components/UI/Paginator";
+
 
 // style
 import './PageUpDownload.css';
@@ -21,11 +28,19 @@ const PageUpDownload:FC = (props) => {
 
   // store
   const {
-    storeFilesInfo, 
+    storeFilesInfoFiltered, 
+    storeFilesInfoFilteredPaginated,
     storeUplstatus,
+    storeSearchStr,
+    numOfPages,
+    currentPage,
   } = useSelector( (store: RootState) => ({
-    storeFilesInfo: store.upDownReducer.filesInfo,
+    storeFilesInfoFiltered: store.upDownReducer.filesInfoFiltered,
+    storeFilesInfoFilteredPaginated: store.upDownReducer.filesInfoFilteredPaginated,
     storeUplstatus: store.upDownReducer.uploadStatus,
+    storeSearchStr: store.upDownReducer.searchStr,
+    numOfPages: store.upDownReducer.numOfPages,
+    currentPage: store.upDownReducer.currentPage,
   })
   );
 
@@ -49,7 +64,18 @@ const PageUpDownload:FC = (props) => {
     }
   }
 
+  const handleUpdateFilterPage = (e: any) => {
+    dispatch(actionsUpDownRed.setsearchStr(e.target.value));
+    dispatch(filterPageFilesArray({}));
+  }
+
+  const SetActivePageNum = (val: number) => {
+    dispatch( actionsUpDownRed.setCurrentPage(val) );
+  }
+
+
   useEffect( () => {
+    document.title = "WA3: Up\\Down-load";
     dispatch( fetchFilesInfo({}) );
   }, [dispatch])
 
@@ -82,19 +108,34 @@ const PageUpDownload:FC = (props) => {
           <button onClick={() => {
             dispatch( fetchFilesInfo({}) );
           }}>refresh files</button> 
+
+          <br /><br />
+          <input 
+            value={storeSearchStr}
+            onChange={handleUpdateFilterPage}
+          />
           
+          <Paginator 
+            numOfPages={numOfPages}
+            activePageNum={currentPage}
+            setActivePageNum={SetActivePageNum}
+          />
+
           <div className="divDownload">
-            { (storeFilesInfo.files_list !== undefined)
+            <div className="downlds_wrapper">
+            { (storeFilesInfoFilteredPaginated.files_list.length > 0)
               ? <>
-              { storeFilesInfo.files_list.map( (item) => {
-                return <div key={item} style={{marginBottom:'10px'}}>
-                  <a href={process.env.REACT_APP_BASE_URL +  storeFilesInfo.serve_url + '/' + item}>{item}</a> {/* +'/f'+ */}
-                </div>  
+              { storeFilesInfoFilteredPaginated.files_list[currentPage].map( (item) => {
+                return <DLItem 
+                    key={item.file_name}
+                    item={item}
+                    serve_url={storeFilesInfoFiltered.serve_url}
+                  />
               }) }              
               </> 
               : <></> 
             }
-
+            </div>
           </div> 
           </>
         }

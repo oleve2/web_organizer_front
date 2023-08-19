@@ -12,9 +12,11 @@
   display: flex;
   flex-direction: column;
 }
-.centered {
+.text_centered {
   margin-left: auto;
   margin-right: auto;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 @media (max-width: 650px) {
