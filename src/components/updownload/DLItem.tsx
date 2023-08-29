@@ -107,6 +107,11 @@ const DLItem:FC<DLItemProps> = (props) => {
         <a href={process.env.REACT_APP_BASE_URL +  props.serve_url + '/' + props.item.file_name}>
           {(props.item.file_isdir ? ' [DIR] ' : '' ) + props.item.file_name} 
         </a>    
+        
+        <div>
+          <button onClick={handleBtnEdit}>Edit Name</button>
+          <button onClick={handleBtnDelete}>Delete</button>   
+        </div>
 
         {(props.item.file_isdir) ? <img className='dlitem_shell' src={imgFolder} alt=""/> : ''}
 
@@ -129,9 +134,9 @@ const DLItem:FC<DLItemProps> = (props) => {
           ? <img className='dlitem_shell' src={imgDoc} alt=""/>
           : ''
         }   
+        
 
-        <button onClick={handleBtnEdit}>Edit Name</button>
-        <button onClick={handleBtnDelete}>Delete</button>   
+
       </div>
 
       {/* update item name */}
