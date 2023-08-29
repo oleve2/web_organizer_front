@@ -5,7 +5,8 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
 // models
-import { FilesInfoModel, UploadFileModel, IFileDownld, FilesInfoModelFilteredPaged } from '../models/models';
+import { FilesInfoModel, UploadFileModel, IFileDownld, FilesInfoModelFilteredPaged, 
+  FileUpdateDeleteRequest, FileUpdateDeleteResponseModel } from '../models/models';
 import { calcNumOfPages } from "../utils/utils";
 
 // utils
@@ -81,7 +82,7 @@ export const fetchFilesInfo = createAsyncThunk(
   'data/filesInfo',
   async (obj: Object, thunkAPI) => {
     let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/files_list')
-    let data = await resp.json();
+    let data: FilesInfoModel = await resp.json();
     thunkAPI.dispatch( actionsUpDownRed.setFilesInfo(data) );
     thunkAPI.dispatch( filterPageFilesArray({}) );
   }
@@ -153,5 +154,34 @@ export const filesUpload = createAsyncThunk(
   }
 )
 
+export const FileDoUpdateName = createAsyncThunk(
+  'data/fileDoUpdateName',
+  async (obj: FileUpdateDeleteRequest, thunkAPI) => {
+    let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/files_updateItem', {
+      method: 'POST',
+      body: JSON.stringify(obj),
+    })
+    let data: FileUpdateDeleteResponseModel = await resp.json();
+    console.log(data);
+    
+    if (data.status === true) {
+      thunkAPI.dispatch(fetchFilesInfo({}));
+    }
+  }
+)
 
-
+export const FileDoDelete = createAsyncThunk(
+  'data/fileDoDelete',
+  async (obj: FileUpdateDeleteRequest, thunkAPI) => {
+    let resp = await fetch(process.env.REACT_APP_BASE_URL + '/api/v1/files_deleteItem', {
+      method: 'POST',
+      body: JSON.stringify(obj)
+    })
+    let data: FileUpdateDeleteResponseModel = await resp.json();
+    console.log(data);
+    
+    if (data.status === true) {
+      thunkAPI.dispatch(fetchFilesInfo({}));
+    }
+  }
+)

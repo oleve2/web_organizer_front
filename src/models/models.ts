@@ -18,7 +18,7 @@ export interface PartModel {
   cnt: number
 }
 
-// base reducer models ------------------------------
+// updownload reducer models ------------------------------
 export interface IFileDownld {
   file_name: string,
   file_isdir: boolean,
@@ -34,10 +34,21 @@ export interface FilesInfoModelFilteredPaged {
   serve_url: string,
 }
 
-// updownload reducer models ------------------------------
 export interface UploadFileModel {
   file: FileList, //File[],
 }
+
+export interface FileUpdateDeleteRequest {
+  file_new_name: string,
+  file_original: IFileDownld,
+}
+
+export interface FileUpdateDeleteResponseModel {
+  file_original: IFileDownld,
+  status:  boolean,
+  error_str: string,
+}
+
 
 // auth reducer models ------------------------------
 export interface LoginTokenModel {
