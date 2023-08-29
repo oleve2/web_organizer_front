@@ -3,6 +3,7 @@
   flex-direction: column;
   margin: 10px;
   justify-content: flex-start;
+  max-width: 320px;
 }
 
 .dlitem_shell {
