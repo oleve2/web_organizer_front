@@ -1,0 +1,23 @@
+
+.cell_full {
+  border: 1px solid black;
+  /*width: 250px;*/
+  flex-basis: 100%;
+  min-height: 100px;
+  margin: 5px;
+}
+
+.cell_current {
+  background-color: rgb(253, 249, 1);
+}
+
+.cell_mini {
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  width: 25px;
+  min-height: 10px;
+  margin: 2px;
+}
+
+

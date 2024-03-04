@@ -5,11 +5,11 @@ Multiple users refeactor is in production.
   
   
 ## Installation
-- Install nodejs LTS version from your OS.
-- Install serve package to run the built bundle ```npm install -g serve```
-- Clone repository and run ```npm install``` inside the root folder
+- Install nodejs LTS version from your OS and [PNPM package manager](https://pnpm.io/).
+- Install serve package to run the built bundle ```pnpm install -g serve```
+- Clone repository and run ```pnpm install``` inside the root folder
 - Make and ``.env``` file in the root of the project (see ```.env file``` topic for details).
-- You can run a dev server with ```npm run start``` command (not recommended) or build a bundle by ```npm run build``` command and serve the bundle from (for example) the root of the project by command ```serve -s ./build/ -l 4001```.
+- You can run a dev server with ```pnpm run start``` command (not recommended) or build a bundle by ```pnpm run build``` command and serve the bundle from (for example) the root of the project by command ```serve -s ./build/ -l 4001```.
 The frontend will be available on http://localhost:4001
 
 ## .env file

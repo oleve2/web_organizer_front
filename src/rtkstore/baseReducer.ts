@@ -203,7 +203,7 @@ export const doSearchStore = createAsyncThunk(
       })
       .filter( (item) => {
         let tagsSelectedList = appState.baseReducer.tagsSelectedList;
-        if (tagsSelectedList.length == 0) {
+        if (tagsSelectedList.length === 0) {
           return item;
         } else {
           return IfOneTagExistsInItem(item, tagsSelectedList);

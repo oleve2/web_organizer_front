@@ -1,0 +1,13 @@
+
+.ptp_element {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  min-width: 300px;
+  padding: 10px;
+}
+
+
+
+
+

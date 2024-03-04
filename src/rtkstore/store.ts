@@ -8,6 +8,7 @@ import analyticReducer from './analyticReducer';
 import authReducer from './authReducer';
 import upDownReducer from './upDownReducer';
 import tagCloudReducer from './tagCloudReducer';
+import calendarReducer from './calendarReducer';
 
 //
 export const store = configureStore({
@@ -18,6 +19,7 @@ export const store = configureStore({
     authReducer: authReducer,
     upDownReducer: upDownReducer,
     tagCloudReducer: tagCloudReducer,
+    calendarReducer: calendarReducer,
   }
 })
 
