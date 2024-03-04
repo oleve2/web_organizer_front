@@ -1,25 +1,18 @@
 import { useState, useEffect } from 'react';
 
 
-interface MyDimType {
-  width: Number | undefined,
-  height: Number | undefined,
+const getWindowDimensions = () => {
+  const { innerWidth: width, innerHeight: height} = window;
+  return {width, height}
 }
 
-
 export default function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState<MyDimType>({
-    width: undefined,
-    height: undefined,
-  });  
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
 
   useEffect( () => {
     if (typeof window !== 'undefined') {
       const handleResize = () => {
-        setWindowDimensions({   
-          width: window?.innerWidth,
-          height: window?.innerHeight,
-        }); 
+        setWindowDimensions(getWindowDimensions()); 
       } 
 
       // Add event listener

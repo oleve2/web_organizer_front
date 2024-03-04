@@ -1,7 +1,7 @@
 import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, lazy, Suspense } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // drag and drop enable
@@ -9,13 +9,19 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TouchBackend } from 'react-dnd-touch-backend';
 
-// pages
+/*
 import PageHome from './pages/PageHome';
 import PageBase from './pages/PageBase';
+
 import PageActivities from './pages/PageActivities';
 import PageAnalyticsByOne from './pages/PageAnalytics';
 import PageUpDownload from './pages/PageUpDownload';
 import PageD3 from './pages/PageD3';
+import PageCalendar from './pages/PageCalendar';
+import PageTaskPlanner from './pages/PageTaskPlanner';
+import PageTests from './pages/PageTests';
+*/
+
 
 // components
 import BaseCardSingle from './components/base/baseCardSingle';
@@ -37,6 +43,21 @@ import { setLoginToken } from './rtkstore/authReducer';
 
 // https://stackoverflow.com/questions/70098392/react-chartjs-2-with-chartjs-3-error-arc-is-not-a-registered-element
 import 'chart.js/auto';
+
+
+// pages
+const PageHome = lazy(() => import('./pages/PageHome'));
+const PageBase = lazy(() => import('./pages/PageBase'));
+const PageActivities = lazy(() => import('./pages/PageActivities'));
+const PageAnalyticsByOne = lazy(() => import('./pages/PageAnalytics'));
+const PageUpDownload = lazy(() => import('./pages/PageUpDownload'));
+const PageD3 = lazy(() => import('./pages/PageD3'));
+const PageCalendar = lazy(() => import('./pages/PageCalendar'));
+const PageTaskPlanner = lazy(() => import('./pages/PageTaskPlanner'));
+const PageTests = lazy(() => import('./pages/PageTests'));
+
+
+
 
 const App:FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -89,6 +110,7 @@ const App:FC = () => {
     : <>
     <div className='wrapper'>
       <BrowserRouter>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/' element={<PageHome/>}></Route>
@@ -99,7 +121,12 @@ const App:FC = () => {
           <Route path='/analytics' element={<PageAnalyticsByOne/>}></Route>
           <Route path='/updownload' element={<PageUpDownload/>}></Route>
           <Route path='/d3_showcase' element={<PageD3/>}></Route>
+          <Route path='/calendar' element={<PageCalendar/>}></Route>
+          <Route path='/task_planner' element={<PageTaskPlanner/>}></Route>
+          <Route path='/tests' element={<PageTests />}></Route>
         </Routes>
+      </Suspense>
+
       </BrowserRouter>
     </div>    
     </>

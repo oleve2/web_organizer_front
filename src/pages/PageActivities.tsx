@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom"
 

@@ -1,0 +1,13 @@
+
+.calcard_wrapper {
+  width: 600px;
+  height: fit-content;
+  margin: 10px;
+  border: 1px solid blue;
+
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  padding: 10px;  
+}
+

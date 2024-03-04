@@ -126,5 +126,40 @@ export interface RepIndivGraphsModel {
 // draggable  -------------------------------------------------
 /*export interface TCItemModel {
   item: string,
-}*/
+}
+*/
+
+// Calendar  -------------------------------------------------
+
+export enum RowPlacement {
+  mini = 'mini',
+  full = 'full',
+}
+
+export enum CalendTaskStatus {
+  default = '-',
+  assigned = 'assigned',
+  canceled = 'canceled',
+  done = 'done'
+}
+
+export interface CalendarData {
+  id: number,
+  date: string,
+  name: string,
+  time_from: string,
+  time_to: string,
+  status: string,
+}
+
+export interface CalendarItemR {
+  item_id: string,
+  data: CalendarData[] | null
+}
+
+export enum CalendarMode {
+  calendar = 'Calendar',
+  list = 'List'
+}
+
 

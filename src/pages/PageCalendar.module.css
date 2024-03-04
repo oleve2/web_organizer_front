@@ -1,0 +1,27 @@
+
+.calendar_container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.calendar_Div {
+  display: flex;
+  flex-direction: column;  
+  border: 1px solid black;
+}
+
+
+.modeToggler {
+  display: flex;
+  margin: 5px;
+}
+
+.modeToggler__item {
+  border: 1px solid black;
+  margin-right: 20px;
+  padding: 10px;
+}
+
+.modeToggler__itemActive {
+  background-color: lightblue;
+}

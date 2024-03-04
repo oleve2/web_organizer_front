@@ -36,6 +36,9 @@ const Navigation:FC<NavigationProps> = (props) => {
     {name: 'Analytics', lnk: '/analytics'},
     {name: 'UpDownload', lnk: '/updownload'},
     {name: 'D3JS Showcase', lnk: '/d3_showcase'},
+    {name: 'Calendar', lnk: '/calendar'},
+    {name: 'Task Planner', lnk: '/task_planner'},
+    //{name: '[Tests - under construction]', lnk: '/tests'},
   ]
 
   const toggleDrawer = (open: boolean) => {
