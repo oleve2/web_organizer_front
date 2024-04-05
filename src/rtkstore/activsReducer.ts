@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 // functions
-import { CalcPartsWithCnts, suppFindKeyInActivArr } from "../utils/utils";
-import { calcNumOfPages, DivideArrayOnParts } from "../utils/utils";
+import { CalcPartsWithCnts, suppFindKeyInActivArr } from "@/utils/utils";
+import { calcNumOfPages, DivideArrayOnParts } from "@/utils/utils";
 
 // models
-import { PartModel, ActivityLogModel, ActivityModel } from '../models/models';
+import { PartModel, ActivityLogModel, ActivityModel } from '@/models/models';
 import { RootState } from "./store";
 
 interface ActivsState {

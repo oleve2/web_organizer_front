@@ -2,12 +2,8 @@
 import { FC, useState } from "react";
 
 // models
-import { ActivityLogModel } from '../../models/models';
+import { ActivityLogModel } from '@/models/models';
 
-/* props:
-  - handleSaveNewActiv
-*/
-//
 
 interface FormNewActivLogProps {
   handleSaveNewActivLog: (dataObj: ActivityLogModel) => void,

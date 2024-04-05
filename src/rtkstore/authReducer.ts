@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk} from "@reduxjs/toolkit";
 
 // models
-import { LoginTokenModel } from '../models/models';
+import { LoginTokenModel } from '@/models/models';
 
 interface AuthState {
   login: string,

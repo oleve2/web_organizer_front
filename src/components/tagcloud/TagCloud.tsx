@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { DragSourceMonitor, useDrop } from 'react-dnd'
 
 // store
-import { RootState, AppDispatch } from '../../rtkstore/store';
-import { actionsBaseRed } from '../../rtkstore/baseReducer';
-import { actionsTagCloudRed } from '../../rtkstore/tagCloudReducer';
+import { RootState, AppDispatch } from '@/rtkstore/store';
+import { actionsBaseRed } from '@/rtkstore/baseReducer';
+import { actionsTagCloudRed } from '@/rtkstore/tagCloudReducer';
 
 // components
 import TagSingle from './TagSingle';
@@ -17,10 +17,10 @@ import TCFormEdit from './TCFormEdit';
 import './TagCloud.css';
 
 // models
-import { TCTagModel } from '../../models/models';
+import { TCTagModel } from '@/models/models';
 
 // utils 
-import { TCTag_checkTagIdInTagList } from '../../utils/utils';
+import { TCTag_checkTagIdInTagList } from '@/utils/utils';
 
 
 interface TagCloudProps {

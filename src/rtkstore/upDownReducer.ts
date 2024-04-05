@@ -6,12 +6,11 @@ import { RootState } from "./store";
 
 // models
 import { FilesInfoModel, UploadFileModel, IFileDownld, FilesInfoModelFilteredPaged, 
-  FileUpdateDeleteRequest, FileUpdateDeleteResponseModel } from '../models/models';
-import { calcNumOfPages } from "../utils/utils";
+  FileUpdateDeleteRequest, FileUpdateDeleteResponseModel } from '@/models/models';
 
 // utils
-import { DivideArrayOnParts } from "../utils/utils";
-
+import { DivideArrayOnParts } from "@/utils/utils";
+import { calcNumOfPages } from "@/utils/utils";
 
 
 interface UpDownState {

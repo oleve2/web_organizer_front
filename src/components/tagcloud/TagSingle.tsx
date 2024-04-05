@@ -5,7 +5,7 @@ import { useDrag } from 'react-dnd'
 import './TagCloud.css';
 
 // models
-import { TCTagModel } from '../../models/models';
+import { TCTagModel } from '@/models/models';
 
 
 interface TagSingleProps {

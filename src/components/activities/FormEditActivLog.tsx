@@ -2,10 +2,8 @@
 import { FC, useState, useEffect } from "react";
 
 // models
-import { ActivityLogModel } from "../../models/models";
+import { ActivityLogModel } from "@/models/models";
 
-// store
-//import { RootState } from '../../rtkstore/store';
 
 interface FormEditActivLogProps {
   itemEditActivLog: ActivityLogModel,

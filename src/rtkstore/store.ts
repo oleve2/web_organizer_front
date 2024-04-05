@@ -20,7 +20,8 @@ export const store = configureStore({
     upDownReducer: upDownReducer,
     tagCloudReducer: tagCloudReducer,
     calendarReducer: calendarReducer,
-  }
+  }, 
+  devTools: process.env.REACT_APP_NODEENV !== 'production',
 })
 
 export type RootState = ReturnType<typeof store.getState>;

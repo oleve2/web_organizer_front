@@ -14,11 +14,11 @@ import ListItemButton from '@mui/material/ListItemButton';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 
 // images
-import menuBlue from '../../assets/menu_blue.png';
+import menuBlue from '@/assets/menu_blue.png';
 
 // store
-import { logoutAndClearLS } from "../../rtkstore/authReducer";
-import { RootState, AppDispatch } from '../../rtkstore/store';
+import { logoutAndClearLS } from "@/rtkstore/authReducer";
+import { RootState, AppDispatch } from '@/rtkstore/store';
 
 interface NavigationProps {}
 

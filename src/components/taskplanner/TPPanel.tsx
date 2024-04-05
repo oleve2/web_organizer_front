@@ -9,7 +9,7 @@ import TPTable from "./TPTable";
 import Arrow from "./Arrow";
 
 // hooks
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 // data
 import { data } from "./taskplanner_data";

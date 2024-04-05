@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { FC } from 'react';
 
-import { ItemModel } from '../../models/models';
+import { ItemModel } from '@/models/models';
 
 // styles
 import './baseCard.css';

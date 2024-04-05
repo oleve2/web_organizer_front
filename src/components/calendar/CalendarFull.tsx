@@ -6,13 +6,13 @@ import CalendarRow from "./CalendarRow";
 import CalendarItemPopupCard from "./CalendarItemPopupCard";
 
 // store 
-import { AppDispatch, RootState } from "../../rtkstore/store";
-import { actionsCalendRed, calDataEmpty } from "../../rtkstore/calendarReducer";
-import { fetchCalendarGrid } from "../../rtkstore/calendarReducer"; 
+import { AppDispatch, RootState } from "@/rtkstore/store";
+import { actionsCalendRed, calDataEmpty } from "@/rtkstore/calendarReducer";
+import { fetchCalendarGrid } from "@/rtkstore/calendarReducer"; 
 
 
 // models
-import { RowPlacement, CalendarItemR } from "../../models/models";
+import { RowPlacement, CalendarItemR } from "@/models/models";
 
 
 interface CalendardFullProps {

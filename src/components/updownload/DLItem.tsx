@@ -2,18 +2,18 @@ import { useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 // models
-import { IFileDownld, FileUpdateDeleteRequest } from '../../models/models';
+import { IFileDownld, FileUpdateDeleteRequest } from '@/models/models';
 
 // store
-import { FileDoUpdateName, FileDoDelete } from '../../rtkstore/upDownReducer';
-import { AppDispatch } from '../../rtkstore/store';
+import { FileDoUpdateName, FileDoDelete } from '@/rtkstore/upDownReducer';
+import { AppDispatch } from '@/rtkstore/store';
 
 // styles
 import './DLItem.css';
 
 // images
-import imgFolder from '../../assets/folder.webp';
-import imgDoc from '../../assets/document.jpg';
+import imgFolder from '@/assets/folder.webp';
+import imgDoc from '@/assets/document.jpg';
 
 interface DLItemProps {
   item: IFileDownld,

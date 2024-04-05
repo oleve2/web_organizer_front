@@ -11,7 +11,7 @@ import { Chart } from 'react-chartjs-2';
 */
 
 // models
-import { Data2Model } from '../../models/models';
+import { Data2Model } from '@/models/models';
 
 interface ModBarChartProps {
   type: string,

@@ -5,7 +5,7 @@ import CalendarRow from "./CalendarRow";
 import CalendarItemPopupCard from "./CalendarItemPopupCard";
 
 // models
-import { RowPlacement, CalendarItemR } from "../../models/models"; 
+import { RowPlacement, CalendarItemR } from "@/models/models"; 
 
 interface CalendardMiniProps {
   currDate: string,

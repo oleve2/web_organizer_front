@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
 // models
-import { ActivityModel } from '../../models/models';
+import { ActivityModel } from '@/models/models';
 
 interface FormNewActivNameProps {
   handleSaveNewActivName: (val: ActivityModel) => void,

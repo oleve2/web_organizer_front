@@ -9,24 +9,11 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TouchBackend } from 'react-dnd-touch-backend';
 
-/*
-import PageHome from './pages/PageHome';
-import PageBase from './pages/PageBase';
-
-import PageActivities from './pages/PageActivities';
-import PageAnalyticsByOne from './pages/PageAnalytics';
-import PageUpDownload from './pages/PageUpDownload';
-import PageD3 from './pages/PageD3';
-import PageCalendar from './pages/PageCalendar';
-import PageTaskPlanner from './pages/PageTaskPlanner';
-import PageTests from './pages/PageTests';
-*/
-
 
 // components
-import BaseCardSingle from './components/base/baseCardSingle';
-import BaseCardNew from './components/base/baseCardNew';
-import Login from './components/auth/Login';
+import BaseCardSingle from '@/components/base/baseCardSingle';
+import BaseCardNew from '@/components/base/baseCardNew';
+import Login from '@/components/auth/Login';
 
 // hooks
 import useWindowDimensions from './hooks/useWindowDimensions';

@@ -6,25 +6,25 @@ import { useDispatch } from "react-redux";
 //import  cloneDeep from 'lodash.clonedeep';
 
 // store
-import { fetchBaseItems } from "../../rtkstore/baseReducer";
-import { AppDispatch } from '../../rtkstore/store';
+import { fetchBaseItems } from "@/rtkstore/baseReducer";
+import { AppDispatch } from '@/rtkstore/store';
 
 // drag-n-drop
 import { DragSourceMonitor, useDrop } from 'react-dnd'
 
 // components
-import Navigation from "../layout/Navigation";
-import TagCloud from "../tagcloud/TagCloud";
-import TagSingle from "../tagcloud/TagSingle";
+import Navigation from "@/components/layout/Navigation";
+import TagCloud from "@/components/tagcloud/TagCloud";
+import TagSingle from "@/components/tagcloud/TagSingle";
 
 // models
-import { ItemModel, TCTagModel } from "../../models/models";
+import { ItemModel, TCTagModel } from "@/models/models";
 
 // styles
 import '../tagcloud/TagCloud.css';
 
 // utils
-import { TCTag_checkTagIdInTagList, TCTag_removeTagFromTagListById } from "../../utils/utils";
+import { TCTag_checkTagIdInTagList, TCTag_removeTagFromTagListById } from "@/utils/utils";
 
 interface BaseCardSingleProps {}
 

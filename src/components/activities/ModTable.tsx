@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // models
-import { ActivityLogModel } from '../../models/models';
+import { ActivityLogModel } from '@/models/models';
 
 interface ModTableProps {
   activs: ActivityLogModel[],

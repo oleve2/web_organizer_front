@@ -2,17 +2,17 @@ import Navigation from "../layout/Navigation"
 import { FC, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchBaseItems } from "../../rtkstore/baseReducer";
+import { fetchBaseItems } from "@/rtkstore/baseReducer";
 import { useSelector } from "react-redux";
 
 // styles
 import './baseCardNew.css';
 
 // store
-import { AppDispatch, RootState} from '../../rtkstore/store';
+import { AppDispatch, RootState} from '@/rtkstore/store';
 
 // models
-import { ItemModel } from '../../models/models';
+import { ItemModel } from '@/models/models';
 
 interface BaseCardNewProps {}
 

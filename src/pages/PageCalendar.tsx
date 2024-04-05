@@ -1,18 +1,18 @@
 import { FC, useState } from "react";
-import Navigation from "../components/layout/Navigation";
 import { useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux"; 
-import { AppDispatch, RootState  } from "../rtkstore/store";
-import { actionsCalendRed } from "../rtkstore/calendarReducer";
+
+import { AppDispatch, RootState  } from "@/rtkstore/store";
+import { actionsCalendRed } from "@/rtkstore/calendarReducer";
 
 // components
-import CalendardMini from "../components/calendar/CalendarMini";
-import CalendardFull from "../components/calendar/CalendarFull";
-import CalendarItemsTable from "../components/calendar/CalendarItemsTable";
+import Navigation from "@/components/layout/Navigation";
+import CalendardMini from "@/components/calendar/CalendarMini";
+import CalendardFull from "@/components/calendar/CalendarFull";
+import CalendarItemsTable from "@/components/calendar/CalendarItemsTable";
 
 // models
-import { CalendarMode } from "../models/models";
+import { CalendarMode } from "@/models/models";
 
 // styles
 import spc from './PageCalendar.module.css';

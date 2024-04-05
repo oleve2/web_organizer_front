@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 // models
-import { RequestRepCommModel, RepCommonModel, RepIndivGraphsModel } from '../models/models';
+import { RequestRepCommModel, RepCommonModel, RepIndivGraphsModel } from '@/models/models';
 
 
 interface AnalyticState {

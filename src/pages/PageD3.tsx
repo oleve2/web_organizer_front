@@ -1,12 +1,12 @@
 import {FC, useState } from 'react';
-import Navigation from '../components/layout/Navigation';
 
 // components
-import D3BarChart from '../components/galeryD3/d3BarChart';
-import D3BarChartZoomable from '../components/galeryD3/d3BarChartZoomable';
-import D3LineChart from '../components/galeryD3/d3LineChart';
+import Navigation from '@/components/layout/Navigation';
+import D3BarChart from '@/components/galeryD3/d3BarChart';
+import D3BarChartZoomable from '@/components/galeryD3/d3BarChartZoomable';
+import D3LineChart from '@/components/galeryD3/d3LineChart';
 
-import { LGDTp } from '../models/modelsd3';
+import { LGDTp } from '@/models/modelsd3';
 
 interface PageD3Props {}
 

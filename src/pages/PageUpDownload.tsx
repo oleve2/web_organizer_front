@@ -1,16 +1,17 @@
-import Navigation from "../components/layout/Navigation"
+
 import { FC, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // store 
-import { RootState, AppDispatch } from "../rtkstore/store";
-import { fetchFilesInfo, filesUpload } from "../rtkstore/upDownReducer";
-import { actionsUpDownRed } from "../rtkstore/upDownReducer";
-import { filterPageFilesArray } from "../rtkstore/upDownReducer";
+import { RootState, AppDispatch } from "@/rtkstore/store";
+import { fetchFilesInfo, filesUpload } from "@/rtkstore/upDownReducer";
+import { actionsUpDownRed } from "@/rtkstore/upDownReducer";
+import { filterPageFilesArray } from "@/rtkstore/upDownReducer";
 
 // components
-import DLItem from "../components/updownload/DLItem";
-import Paginator from "../components/UI/Paginator";
+import Navigation from "@/components/layout/Navigation"
+import DLItem from "@/components/updownload/DLItem";
+import Paginator from "@/components/UI/Paginator";
 
 
 // style

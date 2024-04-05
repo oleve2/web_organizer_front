@@ -5,7 +5,7 @@ import { FC, useState } from 'react';
 import './AttrSelFilt.css';
 
 // models
-import { PartModel } from '../../models/models';
+import { PartModel } from '@/models/models';
 
 interface AttrSelFiltProps {
   attrTitle: string,

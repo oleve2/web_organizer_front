@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+
 import { RootState } from "./store"; 
 
-// utils
 
 // models
-import { CalendarData, CalendarItemR, CalendarMode } from "../models/models"; 
+import { CalendarData, CalendarItemR, CalendarMode } from "@/models/models"; 
 
 
 interface CalendarState {

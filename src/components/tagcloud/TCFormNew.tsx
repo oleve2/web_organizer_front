@@ -2,11 +2,11 @@ import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 // models
-import { TCTagModel } from '../../models/models';
+import { TCTagModel } from '@/models/models';
 
 // store
-import { insertOneTCTag, fetchTCTags } from '../../rtkstore/tagCloudReducer';
-import { AppDispatch } from '../../rtkstore/store';
+import { insertOneTCTag, fetchTCTags } from '@/rtkstore/tagCloudReducer';
+import { AppDispatch } from '@/rtkstore/store';
 
 
 interface TCFormNewProps {

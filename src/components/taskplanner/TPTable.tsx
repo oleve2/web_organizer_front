@@ -3,10 +3,10 @@ import { FC, useState } from "react";
 import Draggable from "react-draggable";
 import { useXarrow } from "react-xarrows";
 
-import { IRowProps } from "../../models/models_taskplanner";
+import { IRowProps } from "@/models/models_taskplanner";
 
 import s from './TPTable.module.css';
-import { openStdin } from "process";
+
 
 interface ITableProps {
   name: string,

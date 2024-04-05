@@ -1,14 +1,16 @@
-import Navigation from '../components/layout/Navigation';
+
 
 import React, { FC, useEffect, useState } from 'react';
 
-import galaxy from '../assets/galaxy.jpg';
-import squirtel from '../assets/squirtel.jpeg';
+// componnets
+import Navigation from '@/components/layout/Navigation';
+
+import galaxy from '@/assets/galaxy.jpg';
+import squirtel from '@/assets/squirtel.jpeg';
 
 interface PageHomeProps {}
 
-
-
+//
 const PageHome:FC<PageHomeProps> = (props) => {
   const [pic, setPic] = useState(galaxy)
 

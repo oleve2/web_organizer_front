@@ -3,21 +3,20 @@ import { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // components
-import Navigation from '../components/layout/Navigation';
-import BaseCard   from '../components/base/baseCard';
-import Paginator from '../components/UI/Paginator';
-import AttrSelFilt from '../components/UI/AttrSelFilt'; 
-import TagCloud from '../components/tagcloud/TagCloud';
+import Navigation from '@/components/layout/Navigation';
+import BaseCard   from '@/components/base/baseCard';
+import Paginator from '@/components/UI/Paginator';
+import AttrSelFilt from '@/components/UI/AttrSelFilt'; 
+import TagCloud from '@/components/tagcloud/TagCloud';
 
 // models
-import { ItemModel } from '../models/models';
+import { ItemModel } from '@/models/models';
 
 // store
-import { RootState, AppDispatch } from '../rtkstore/store';
-import { actionsBaseRed } from '../rtkstore/baseReducer';
-import { doSearchStore } from '../rtkstore/baseReducer';
+import { RootState, AppDispatch } from '@/rtkstore/store';
+import { actionsBaseRed } from '@/rtkstore/baseReducer';
+import { doSearchStore } from '@/rtkstore/baseReducer';
 
-//import { CalcPartsWithCnts, calcNumOfPages, DivideArrayOnParts } from '../utils/utils';
 
 interface PageBaseProps {}
 

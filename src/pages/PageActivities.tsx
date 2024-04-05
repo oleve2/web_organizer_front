@@ -3,23 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom"
 
 // components
-import Navigation from '../components/layout/Navigation';
+import Navigation from '@/components/layout/Navigation';
 //import ULPartsList from '../components/layout/ULPartsList';
-import ModTable from '../components/activities/ModTable';
-import FormNewActivName from '../components/activities/FormNewActivName';
-import FormNewActivLog from '../components/activities/FormNewActivLog';
-import FormEditActivLog from '../components/activities/FormEditActivLog';
-import AttrSelFilt from '../components/UI/AttrSelFilt';
-import Paginator from '../components/UI/Paginator';
+import ModTable from '@/components/activities/ModTable';
+import FormNewActivName from '@/components/activities/FormNewActivName';
+import FormNewActivLog from '@/components/activities/FormNewActivLog';
+import FormEditActivLog from '@/components/activities/FormEditActivLog';
+import AttrSelFilt from '@/components/UI/AttrSelFilt';
+import Paginator from '@/components/UI/Paginator';
 
 // models
-import { ActivityLogModel, ActivityModel } from '../models/models';
+import { ActivityLogModel, ActivityModel } from '@/models/models';
 
 
 // store
-import { RootState, AppDispatch } from '../rtkstore/store';
-import { actionsActivsRed, fetchSaveNewActiv, fetchSaveNewActivName, fetchDeleteActivLogById, fetchUpdateActivLogById } from '../rtkstore/activsReducer';
-import { doActivsSearch } from '../rtkstore/activsReducer';
+import { RootState, AppDispatch } from '@/rtkstore/store';
+import { actionsActivsRed, fetchSaveNewActiv, fetchSaveNewActivName, fetchDeleteActivLogById, fetchUpdateActivLogById } from '@/rtkstore/activsReducer';
+import { doActivsSearch } from '@/rtkstore/activsReducer';
 
 
 //

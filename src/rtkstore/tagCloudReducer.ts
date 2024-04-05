@@ -5,7 +5,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 // utils
 
 // models
-import { TCTagModel } from "../models/models";
+import { TCTagModel } from "@/models/models";
 
 interface TagCloudState {
   isOpened: boolean,

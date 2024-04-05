@@ -1,5 +1,5 @@
 
-import { PartModel, ItemModel, TCTagModel} from "../models/models";
+import { PartModel, ItemModel, TCTagModel} from "@/models/models";
 
 
 

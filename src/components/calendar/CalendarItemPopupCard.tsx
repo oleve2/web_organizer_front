@@ -2,11 +2,11 @@ import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // models
-import { CalendarData, CalendTaskStatus } from "../../models/models"; 
+import { CalendarData, CalendTaskStatus } from "@/models/models"; 
 
 // store
-import { AppDispatch, RootState } from "../../rtkstore/store";
-import { insertCelendarItem, updateCelendarItem, deleteCelendarItem, fetchCalendarGrid } from "../../rtkstore/calendarReducer";
+import { AppDispatch, RootState } from "@/rtkstore/store";
+import { insertCelendarItem, updateCelendarItem, deleteCelendarItem, fetchCalendarGrid } from "@/rtkstore/calendarReducer";
 
 // style
 import s from './CalendarCard.module.css';
@@ -70,14 +70,12 @@ const CalendarItemPopupCard:FC<CalendarItemPopupCardProps> = (props) => {
 
   return (
     <div className={s.calcard_wrapper}>
-      <h3>{props.header_text} | isCreateNew={JSON.stringify(props.isCreateNew)}</h3>
+      <h3>{props.header_text}</h3>
       
       <button onClick={() => { set_isEdit(!isEdit) }}>Edit {JSON.stringify(isEdit)}</button> 
       |  
       <button onClick={doDeleteItem}>Delete</button>
       <br /><br />
-      
-      {/* <div>{JSON.stringify(calendarItem)}</div>*/}
       <br />
       
       { (isEdit || props.isCreateNew)

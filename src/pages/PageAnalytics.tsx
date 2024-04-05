@@ -1,23 +1,20 @@
 
-import Navigation from '../components/layout/Navigation';
 import { FC, useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // components
-import ModBarChart from '../components/activities/ModBarChart';
+import ModBarChart from '@/components/activities/ModBarChart';
+import Navigation from '@/components/layout/Navigation';
 
 // https://codepen.io/Abraxas666/pen/vYKoRvy
 import { Chart } from 'react-chartjs-2';
 // https://stackoverflow.com/questions/70158529/using-chart-js-options-with-react-chartjs-2-and-typescript
 
 // store
-import { RootState, AppDispatch } from '../rtkstore/store';
-import { datesSetupOther } from '../rtkstore/analyticReducer';
-import { fetchCommonGraphsStore, fetchIndividualgraphsStore, options } from '../rtkstore/analyticReducer';
-import { actionsAnalyticRed } from '../rtkstore/analyticReducer'; 
-
-// models
-//import { RepCommonModel, RepIndivGraphsModel } from '../models/models';
+import { RootState, AppDispatch } from '@/rtkstore/store';
+import { datesSetupOther } from '@/rtkstore/analyticReducer';
+import { fetchCommonGraphsStore, fetchIndividualgraphsStore, options } from '@/rtkstore/analyticReducer';
+import { actionsAnalyticRed } from '@/rtkstore/analyticReducer'; 
 
 // style
 import './PageAnalytics.css';

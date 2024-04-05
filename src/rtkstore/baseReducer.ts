@@ -1,17 +1,14 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { CalcPartsWithCnts, AddLink } from "../utils/utils";
+
 import { RootState } from "./store";
 
 // utils
-import { 
-  calcNumOfPages, DivideArrayOnParts,
-  IfOneTagExistsInItem,
-} from "../utils/utils";
-
+import { calcNumOfPages, DivideArrayOnParts, IfOneTagExistsInItem } from "@/utils/utils";
+import { CalcPartsWithCnts, AddLink } from "@/utils/utils";
 
 // models
-import { ItemModel, TCTagModel } from "../models/models";
+import { ItemModel, TCTagModel } from "@/models/models";
 
 
 interface BaseState {

@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 
-import { fetchCelendarItemList } from "../../rtkstore/calendarReducer";
-import { CalendarData } from "../../models/models";
+import { fetchCelendarItemList } from "@/rtkstore/calendarReducer";
+import { CalendarData } from "@/models/models";
 
 
 const CalendarItemsTable:FC = (props) => {

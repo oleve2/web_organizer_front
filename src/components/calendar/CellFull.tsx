@@ -1,13 +1,13 @@
 import { FC } from "react";
 
 // models
-import { CalendarData, CalendTaskStatus } from "../../models/models"; 
+import { CalendarData, CalendTaskStatus } from "@/models/models"; 
 
 // store
 // store
 import { /*useSelector,*/ useDispatch } from "react-redux"; 
-import { AppDispatch/*, RootState*/ } from "../../rtkstore/store";
-import { actionsCalendRed } from "../../rtkstore/calendarReducer";
+import { AppDispatch/*, RootState*/ } from "@/rtkstore/store";
+import { actionsCalendRed } from "@/rtkstore/calendarReducer";
 
 // style
 import s from './CellFull.module.css';

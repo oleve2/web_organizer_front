@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TCTagModel } from '../../models/models';
+import { TCTagModel } from '@/models/models';
 
 interface TagContextMenuProps {
   anchorPoint: {x: number, y: number},

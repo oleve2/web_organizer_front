@@ -7,7 +7,7 @@ import s from './CalendarRow.module.css';
 import CellFull from "./CellFull";
 
 // models
-import { RowPlacement, CalendarItemR } from "../../models/models"; 
+import { RowPlacement, CalendarItemR } from "@/models/models"; 
 
 
 interface CalendarRowProps {
