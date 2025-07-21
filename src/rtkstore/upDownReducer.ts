@@ -84,6 +84,7 @@ export const fetchFilesInfo = createAsyncThunk(
     let data: FilesInfoModel = await resp.json();
     thunkAPI.dispatch( actionsUpDownRed.setFilesInfo(data) );
     thunkAPI.dispatch( filterPageFilesArray({}) );
+    //thunkAPI.dispatch( actionsUpDownRed.setCurrentPage(0)); // вопрос - в какой момент это вообще делается?
   }
 )
 
@@ -121,8 +122,6 @@ export const filterPageFilesArray = createAsyncThunk(
       files_list: FI_filtered_paged,
     }
     thunkAPI.dispatch( actionsUpDownRed.setfilesInfoFilteredPaged(FI_Filt_Paged) );
-    
-    thunkAPI.dispatch(actionsUpDownRed.setCurrentPage(0)); 
   } 
 )
 

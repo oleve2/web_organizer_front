@@ -21,12 +21,6 @@ import './PageUpDownload.css';
 const PageUpDownload:FC = (props) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const opers: string[] = ['download', 'upload'];
-  const [operation, setoperation] = useState<string>(opers[0]);
-
-  // upload
-  const [file, setFile] = useState<FileList | null>(null);
-
   // store
   const {
     storeFilesInfoFiltered, 
@@ -44,6 +38,15 @@ const PageUpDownload:FC = (props) => {
     currentPage: store.upDownReducer.currentPage,
   })
   );
+  
+  // local vars
+  const opers: string[] = ['download', 'upload'];
+  const [operation, setoperation] = useState<string>(opers[0]);
+  const [pageNum, set_pageNum] = useState<number>(currentPage);
+ 
+  // upload
+  const [file, setFile] = useState<FileList | null>(null);
+
 
   // -----------------------------------
   const handleChooseMode = (value: string) => {
@@ -68,10 +71,12 @@ const PageUpDownload:FC = (props) => {
   const handleUpdateFilterPage = (e: any) => {
     dispatch(actionsUpDownRed.setsearchStr(e.target.value));
     dispatch(filterPageFilesArray({}));
+    dispatch( actionsUpDownRed.setCurrentPage(0) );
   }
 
   const SetActivePageNum = (val: number) => {
     dispatch( actionsUpDownRed.setCurrentPage(val) );
+    set_pageNum(val);
   }
 
 
@@ -118,7 +123,7 @@ const PageUpDownload:FC = (props) => {
           
           <Paginator 
             numOfPages={numOfPages}
-            activePageNum={currentPage}
+            activePageNum={pageNum} 
             setActivePageNum={SetActivePageNum}
           />
 

@@ -43,7 +43,7 @@ const CalendarRow:FC<CalendarRowProps> = (props) => {
             return <div key={idx} 
               className={ props.currDate === props.items[idx].item_id ? s.cell_full + " " + s.cell_current : s.cell_full }
               >
-                <div>{props.items[idx].item_id}</div>
+              <div>{props.items[idx].item_id}</div>
                 { pdata !== null && <>
                     { pdata.map( (item, idx) => { 
                       return <CellFull key={item.date+"-"+idx}

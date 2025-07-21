@@ -14,6 +14,8 @@ interface CalendarState {
   isCalendarFormActive: boolean,
   calendarItemActive: CalendarData,
   arrCalendarItems: CalendarItemR[][],
+
+  calendarListSearchString: string,
 }
 
 export const calDataEmpty: CalendarData = {
@@ -42,6 +44,7 @@ const initialState: CalendarState = {
   isCalendarFormActive: false,
   calendarItemActive: calDataEmpty,
   arrCalendarItems: [],
+  calendarListSearchString: '',
 }
 
 const calendarReducer = createSlice({
@@ -68,6 +71,10 @@ const calendarReducer = createSlice({
     set_arrCalendarItems(state, action: PayloadAction<CalendarItemR[][]>) {
       state.arrCalendarItems = action.payload;
     },   
+
+    set_calendarListSearchString(state, action: PayloadAction<string>) {
+      state.calendarListSearchString = action.payload;
+    },      
   }
 })
 

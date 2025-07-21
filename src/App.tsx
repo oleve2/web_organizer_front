@@ -33,16 +33,16 @@ import 'chart.js/auto';
 
 
 // pages
-const PageHome = lazy(() => import('./pages/PageHome'));
-const PageBase = lazy(() => import('./pages/PageBase'));
-const PageActivities = lazy(() => import('./pages/PageActivities'));
-const PageAnalyticsByOne = lazy(() => import('./pages/PageAnalytics'));
-const PageUpDownload = lazy(() => import('./pages/PageUpDownload'));
-const PageD3 = lazy(() => import('./pages/PageD3'));
-const PageCalendar = lazy(() => import('./pages/PageCalendar'));
-const PageTaskPlanner = lazy(() => import('./pages/PageTaskPlanner'));
-const PageTests = lazy(() => import('./pages/PageTests'));
-
+const PageHome = lazy(() => import('@/pages/PageHome'));
+const PageBase = lazy(() => import('@/pages/PageBase'));
+const PageActivities = lazy(() => import('@/pages/PageActivities'));
+const PageAnalyticsByOne = lazy(() => import('@/pages/PageAnalytics'));
+const PageUpDownload = lazy(() => import('@/pages/PageUpDownload'));
+const PageD3 = lazy(() => import('@/pages/PageD3'));
+const PageCalendar = lazy(() => import('@/pages/PageCalendar'));
+const PageTaskPlanner = lazy(() => import('@/pages/PageTaskPlanner'));
+const PageTests = lazy(() => import('@/pages/PageTests'));
+const PagePingPong = lazy(() => import('@/pages/PagePingPong'));
 
 
 
@@ -110,6 +110,7 @@ const App:FC = () => {
           <Route path='/d3_showcase' element={<PageD3/>}></Route>
           <Route path='/calendar' element={<PageCalendar/>}></Route>
           <Route path='/task_planner' element={<PageTaskPlanner/>}></Route>
+          <Route path='/ping_pong_game' element={<PagePingPong/>}></Route>
           <Route path='/tests' element={<PageTests />}></Route>
         </Routes>
       </Suspense>

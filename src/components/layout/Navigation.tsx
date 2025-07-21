@@ -38,6 +38,7 @@ const Navigation:FC<NavigationProps> = (props) => {
     {name: 'D3JS Showcase', lnk: '/d3_showcase'},
     {name: 'Calendar', lnk: '/calendar'},
     {name: 'Task Planner', lnk: '/task_planner'},
+    {name: 'Ping Pong Game', lnk: '/ping_pong_game'},
     //{name: '[Tests - under construction]', lnk: '/tests'},
   ]
 

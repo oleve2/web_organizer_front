@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"; 
 
+// store
 import { AppDispatch, RootState  } from "@/rtkstore/store";
 import { actionsCalendRed } from "@/rtkstore/calendarReducer";
 
@@ -27,10 +28,12 @@ const PageCalendar:FC<PageCalendarProps> = (props) => {
     today, 
     grid,
     calendMode,
+    calendSearchString,
   } = useSelector( (store: RootState) => ({
     today: store.calendarReducer.today ,
     grid: store.calendarReducer.arrCalendarItems,
     calendMode: store.calendarReducer.calendMode,
+    calendSearchString: store.calendarReducer.calendarListSearchString,
   }))
 
   const [num_of_rows, set_num_of_rows] = useState(grid.length);
@@ -38,6 +41,10 @@ const PageCalendar:FC<PageCalendarProps> = (props) => {
 
   const doSelectCakendMode = (val: CalendarMode) => {
     dispatch( actionsCalendRed.set_calendMode(val) );
+  }
+
+  const doSetcalendSearchString = (val: string) => {
+    dispatch( actionsCalendRed.set_calendarListSearchString(val) );
   }
 
   useEffect( () => {
@@ -84,7 +91,10 @@ const PageCalendar:FC<PageCalendarProps> = (props) => {
         }
 
         { calendMode === CalendarMode.list &&
-          <CalendarItemsTable />
+          <CalendarItemsTable 
+            calendarListSearchString={calendSearchString}
+            funcChangeCSSValue={doSetcalendSearchString}
+          />
         }
 
       </div>
